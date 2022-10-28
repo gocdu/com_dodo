@@ -1,0 +1,459 @@
+<%@page import="javax.imageio.plugins.bmp.BMPImageWriteParam"%>
+<%@ page import="java.util.*, egovframework.rfc3.board.vo.BoardVO, egovframework.rfc3.board.vo.BoardCategoryVO" %>
+<%@ page import="egovframework.rfc3.menu.vo.MenuVO" %>
+<%@ page import="egovframework.rfc3.common.util.EgovStringUtil" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+    try {
+%>
+
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+ -->
+
+
+
+	<!-- 신청서 작성 -->
+	<form id="formTn" method="post"
+	      action="<%=cm.rfcContextPaths() %>/board/<%=bm.getCommand() != null && bm.getCommand().equals("update") ? "updateAct" : "writeAct"%>.<%=cleanXSS(bm.getUrlExt())%>"
+	      enctype="multipart/form-data"  onsubmit="return  valueCheck(this);">
+	    <input type="hidden" name="orderBy" value="<%=cleanXSS(bm.getOrderBy())%>">
+	    <input type="hidden" name="boardId" value="<%=cleanXSS(bm.getBoardId())%>">
+	    <input type="hidden" name="searchStartDt" value="<%=cleanXSS(bm.getSearchStartDt())%>">
+	    <input type="hidden" name="searchEndDt" value="<%=cleanXSS(bm.getSearchEndDt())%>">
+	    <input type="hidden" name="command" value="<%=bm.getCommand() %>">
+	    <input type="hidden" name="startPage" value="<%=bm.getPageNum() %>">
+	    <input type="hidden" name="pcode" value="<%=bm.getPcode() %>">
+	    <input type="hidden" name="dataSid" value="<%=bm.getDataSid() %>">
+	    <input type="hidden" name="menuCd" value="<%=cleanXSS(EgovStringUtil.isNullToString(request.getParameter("menuCd"))) %>">
+	    <input type="hidden" name="dataTitle" id="dataTitle" value="도시재생 해설 프로그램 예약">
+		
+
+        <p class="caution"><span>모든 항목 필수 입력 항목입니다.</span></p>
+	
+	    <!-- 신청인(부모 또는 보호자) 인적사항  start-->
+	    <div class="board-write-wrap tourtable">
+	        <table>
+	            <caption><span class="blind">신청서 작성표 입니다.</span></caption>
+	            <colgroup>
+	                <col span="1" class="w20"><col span="1">
+	            </colgroup>
+	            <tbody>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField1">유형</label></span></th>
+		                <td>
+							<input type="radio" id="categoryCode1" name="tmpField1" value="개인" <%if(EgovStringUtil.isNullToString(bm.getTmpField1()).equals("개인")){%>checked<%}%>>
+							<label for="categoryCode1">개인</label>
+							<input type="radio" id="categoryCode2" name="tmpField1" value="단체" <%if(EgovStringUtil.isNullToString(bm.getTmpField1()).equals("단체")){%>checked<%}%>>
+							<label for="categoryCode2">단체</label>
+						</td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField2">방문일시</label></span></th>
+						<td>
+		                   	<input id="tmpField2" name="tmpField2" type="date" value="<%=EgovStringUtil.isNullToString(bm.getTmpField2())%>" />
+						</td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField3">방문코스</label></span></th>
+						<td>
+							<input type="checkbox" name="tmpField3" id="box1" value="A" <%if(EgovStringUtil.isNullToString(bm.getTmpField3()).equals("A")){%>checked<%}%> >
+							<label for="box1">A코스</label>
+							
+							<input type="checkbox" name="tmpField3" id="box2" value="B" <%if(EgovStringUtil.isNullToString(bm.getTmpField3()).equals("B")){%>checked<%}%>>
+							<label for="box2">B코스</label>
+							
+							<input type="checkbox" name="tmpField3" id="box3" value="C" <%if(EgovStringUtil.isNullToString(bm.getTmpField3()).equals("C")){%>checked<%}%>>
+							<label for="box3">C코스</label>
+							
+							<input type="checkbox" name="tmpField3" id="box4" value="D" <%if(EgovStringUtil.isNullToString(bm.getTmpField3()).equals("D")){%>checked<%}%>>
+							<label for="box4">D코스</label>
+						</td>
+		           	</tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField4">탐방목적</label></span></th>
+						<td><textarea name="tmpField4" id="tmpField4"><%=EgovStringUtil.isNullToString(bm.getTmpField4())%></textarea></td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField5">투어희망시간</label></span></th>
+		                <td>
+		                	<select id="tmpField5" name="tmpField5">
+		                		<option>선택</option>
+		                		<option value="1" <%if(EgovStringUtil.isNullToString(bm.getTmpField5()).equals("1")){%>selected<%}%>>10:30 ~ 12:00</option>
+		                		<option value="2" <%if(EgovStringUtil.isNullToString(bm.getTmpField5()).equals("2")){%>selected<%}%>>13:00 ~ 14:30</option>
+		                		<option value="3" <%if(EgovStringUtil.isNullToString(bm.getTmpField5()).equals("3")){%>selected<%}%>>14:30 ~ 16:00</option>
+		                		<option value="4" <%if(EgovStringUtil.isNullToString(bm.getTmpField5()).equals("4")){%>selected<%}%>>16:00 ~ 17:30</option>
+		                	</select>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField6">강의요청</label></span></th>
+		                <td>
+		                	<input type="radio" id="tmp1" name="tmpField6" value="요청" <%if(EgovStringUtil.isNullToString(bm.getTmpField6()).equals("요청")){%>checked<%}%>>
+							<label for="tmp1">요청</label>
+		                	<input type="radio" id="tmp2" name="tmpField6" value="미요청" <%if(EgovStringUtil.isNullToString(bm.getTmpField6()).equals("미요청")){%>checked<%}%>>
+							<label for="tmp2">미요청</label>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField7">투어요청</label></span></th>
+		                <td>
+		                	<input type="radio" id="tour1" name="tmpField7" value="요청" <%if(EgovStringUtil.isNullToString(bm.getTmpField7()).equals("요청")){%>checked<%}%>>
+							<label for="tour1">요청</label>
+		                	<input type="radio" id="tour2" name="tmpField7" value="미요청" <%if(EgovStringUtil.isNullToString(bm.getTmpField7()).equals("미요청")){%>checked<%}%>>
+							<label for="tour2">미요청</label>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField8">연령대</label></span></th>
+	   	                <td>
+		                	<input type="radio" id="age1" name="tmpField8" value="1" <%if(EgovStringUtil.isNullToString(bm.getTmpField8()).equals("1")){%>checked<%}%>>
+							<label for="age1">성인</label>
+		                	<input type="radio" id="age2" name="tmpField8" value="2" <%if(EgovStringUtil.isNullToString(bm.getTmpField8()).equals("2")){%>checked<%}%>>
+							<label for="age2">중고등학생</label>
+		                	<input type="radio" id="age3" name="tmpField8" value="3" <%if(EgovStringUtil.isNullToString(bm.getTmpField8()).equals("3")){%>checked<%}%>>
+							<label for="age3">유아 및 초등학생</label>
+		                </td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="userNick" id="userName">성명</label></span></th>
+		                <td>
+		                    <% if (bm.getCommand() != null && "update".equals(bm.getCommand())) { %>
+		                    <input type="text" name="userNick" value="<%=EgovStringUtil.isNullToString(bm.getUserNick())%>" class="w100p"  id="userNick" readonly>
+		                    <%} else {%>
+		                    <input type="text" name="userNick" value="<%=sm.getOfficeNm().equals("") ? sm.getName() : sm.getOfficeNm() %>" class="w100p" id="userNick" readonly>
+		                    <%}%>
+		                </td>
+		            </tr>
+			            <tr>
+			                <th scope="row"><span style="color:red">*</span ><span><label for="tmpField9">성별</label></span></th>
+			                <td>
+			                    <input type="radio" name="tmpField9" id="tmpField9_1" value="남" <%if(EgovStringUtil.isNullToString(bm.getTmpField9()).equals("남")){%>checked<%}%>/>
+			                    <label for="tmpField9_1">남</label>
+			                    <input type="radio" name="tmpField9" id="tmpField9_2" value="여" <%if(EgovStringUtil.isNullToString(bm.getTmpField9()).equals("여")){%>checked<%}%>/>
+			                    <label for="tmpField9_2">여</label>
+			                </td>
+			            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="userTel" id="tel">전화번호</label></span></th>
+		                <td>
+		                	<input id="userTel" name="userTel" class="phone" title="휴대폰 번호를 입력하세요." type="text" value="<%=EgovStringUtil.isNullToString(bm.getUserTel())%>" maxlength="13"/>
+		               	</td>
+		            </tr>
+		            <tr>
+		            	<th scope="row"><span style="color:red">*</span ><span><label for="userCel" id="cel">휴대폰 번호</label></span></th>
+		            	<td>
+		        			<input id="userCel" name="userCel" class="phone" title="휴대폰 번호를 입력하세요." type="text" value="<%=EgovStringUtil.isNullToString(bm.getUserCel())%>" maxlength="13"/>
+		            	</td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="userEmail" id="email">이메일</label></span></th>
+		                <td><input type="text" name="userEmail" value="<%=EgovStringUtil.isNullToString(bm.getUserEmail())%>" class="w100p"  id="userEmail"></td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="userZipcode" id="zipCode">우편번호</label></span></th>
+		                <td>
+		                	<input type="text" name="userZipcode" readonly="readonly" value="<%=EgovStringUtil.isNullToString(bm.getUserZipcode())%>" style="width:100px" id="userZipcode"> 
+		                	<span class="addbtn">
+		                		<a href="javascript:void(0);" onclick="fn_execute_daum_postcode( 'userZipcode', 'userAddress', 'userDetailAddr' );">우편번호 찾기</a>
+	                		</span>
+	                	</td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="userAddress" id="addr">주소</label></span></th>
+		                <td><input type="text" name="userAddress" readonly="readonly" value="<%=EgovStringUtil.isNullToString(bm.getUserAddress())%>" class="w100p" id="userAddress"></td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="userDetailAddr" id="dAddr">상세주소</label></span></th>
+		                <td><input type="text" name="userDetailAddr" value="<%=EgovStringUtil.isNullToString(bm.getUserDetailAddr())%>" class="w100p" id="userDetailAddr"></td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span style="color:red">*</span ><span><label for="dataContent">방문 세부일정</label></span></th>
+		                <td><textarea name="dataContent" id="dataContent"  class="w100p"><%=EgovStringUtil.isNullToString(bm.getDataContent())%></textarea></td>
+		            </tr>
+		            <tr>
+		                <th scope="row"><span><label for="tmpField11">기타</label></span></th>
+		                <td><textarea name="tmpField11" id="tmpField11"  class="w100p"><%=EgovStringUtil.isNullToString(bm.getTmpField11())%></textarea></td>
+		            </tr>
+					<tr class="addCount" style="display:none;">
+						<th scope="row"><span style="color:red">*</span ><span><label for="tmpField20">예약인원</label></span></th>
+						<td><input type="text" name="tmpField20" value="<%=EgovStringUtil.isNullToString(bm.getTmpField20())%>" class="numberOnly" id="tmpField20"> 명</td>
+					</tr>
+            	</tbody>
+	        </table>
+	    </div>
+	    <div class="taC"><%=bm.getWriteIcons()%></div>
+	</form>
+
+<script type="text/javascript">
+	//추가인원 인덱스
+	var count = 0;
+
+    $(document).ready(function(){
+    	// 개인/단체 포맷 변경
+    	fn_checkChange();
+    	//취소버튼 변경(관리자면 목록으로 사용자면 뒤로가기)
+ 		var userBack = "<%=sm.getUserSe()%>";
+		
+		if(userBack != "USR"){
+		    $("#button_wrap").find("a").attr('href','javascript:history.back();');
+		}
+		
+   		$(".numberOnly").on("keyup", function() {
+            $(this).val($(this).val().replace(/[^0-9]/g,""));
+        });
+    	// 코스 선택 - 하나만 가능하도록
+    	$("input[name=tmpField3]").click(function(){
+    	     $("input[name=tmpField3]").prop("checked", false);
+    	     $(this).prop("checked", true);
+   	  	});
+    	// 개인/단체 선택에 따른 포맷 변경
+ 		$("input[name=tmpField1]").on("change", function() {
+ 			fn_checkChange();
+ 		});
+    	//오늘 이후 날짜만 방문 예약 가능
+    		var now_utc = Date.now()
+	 		var timeOff = new Date().getTimezoneOffset()*60000;
+	 		var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+	 		document.getElementById("tmpField2").setAttribute("min", today);
+	    });
+    
+    
+    
+    // 전화번호 및 휴대폰번호 포맷팅
+    $(document).on("keyup",".phone",function(){
+    	var phone = $(this).val();
+		phone = phone.replace(/[^0-9]/g, '');
+	    
+	    if(phone.length <= 10) {
+	       phone = phone.replace(/^(\d{0,3})(\d{0,3})(\d{0,4})$/g, "$1-$2-$3").replace(/\-{1,2}$/g, "");
+	    } else {
+	       phone = phone.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/\-{1,2}$/g, "");
+	    }
+	    
+	    $(this).val(phone);
+	});
+	
+	function fn_checkChange(){
+		// 개인/단체
+		var chk = $("input[name=tmpField1]:checked").val();
+		if(chk != null && chk != 'undefined') {
+			if (chk == '개인') {
+				$('#userName').text('성명');
+				$('#tel').text('전화번호');
+				$('#email').text('이메일');
+				$('#zipCode').text('우편번호');
+				$('#addr').text('주소');
+				$('#dAddr').text('상세주소');
+		      	$('.addCount').hide();
+			} else {
+		      	$('#userName').text('대표자 성명');
+				$('#tel').text('대표자 연락처');
+				$('#email').text('대표자 이메일');
+				$('#zipCode').text('대표자 우편번호');
+				$('#addr').text('대표자 주소');
+				$('#dAddr').text('대표자 상세주소');
+				$('.addCount').show();
+			}
+		}
+	}
+    //<![CDATA[
+    
+    function valueCheck(from){
+        var f = from;
+        
+		var solo = $("#categoryCode1").is(":checked");
+		var party = $("#categoryCode2").is(":checked");
+		if(solo == false && party == false){
+			alert("유형을 선택해주세요.")
+			$("#categoryCode1").focus();
+			return false;
+		}
+		
+
+        if(f.tmpField2.value == ''){
+            alert("방문일시를 입력하시기 바랍니다.");
+            f.tmpField2.focus();
+            return false;
+        }
+        
+		var cos = $("input[name=tmpField3]").is(":checked")
+        if(cos == false){
+    		alert("코스를 선택해주세요.");
+    		$("#box1").focus();
+    		return false;
+    	}
+		
+   	    if(f.tmpField4.value == ''){
+            alert("탐방목적을 입력하시기 바랍니다.");
+            f.tmpField4.focus();
+            return false;
+        }
+   	    
+   		var tourTime = $("#tmpField5").val();
+   		if(tourTime == null || tourTime =="" || tourTime == "선택"){
+   			alert("투어희망 시간을 선택해주세요.");
+   			$("#tmpField5").focus();
+   			return false;
+   		}
+   		
+		var tmp1 = $("#tmp1").is(":checked");
+		var tmp2 = $("#tmp2").is(":checked");
+		if(tmp1 == false && tmp2 == false){
+			alert("강의요청 여부를 선택해주세요.")
+			$("#tmp1").focus();
+			return false;
+		}
+
+		var tour1 = $("#tour1").is(":checked");
+		var tour2 = $("#tour2").is(":checked");
+		if(tour1 == false && tour2 == false){
+			alert("투어요청 여부를 선택해주세요.")
+			$("#tour1").focus();
+			return false;
+		}
+
+		var age1 = $("#age1").is(":checked");
+		var age2 = $("#age2").is(":checked");
+		var age3 = $("#age3").is(":checked");
+		if(age1 == false && age2 == false && age3 == false){
+			alert("연령대를 선택해주세요.")
+			$("#age1").focus();
+			return false;
+		}
+	   
+		var tmpField9_1 = $("#tmpField9_1").is(":checked");
+		var tmpField9_2 = $("#tmpField9_2").is(":checked");
+		if(tmpField9_1 == false && tmpField9_2 == false){
+			alert("성별을 선택해주세요.")
+			$("#tmpField9_1").focus();
+			return false;
+		}
+	   
+        if(f.userTel.value == '' || chkTelNum(f.userTel.value)){
+            alert("전화번호를 확인해주시기 바랍니다.");
+            f.userTel.focus();
+            return false;
+        }
+        
+        if(f.userCel.value == '' || chkTelNum(f.userCel.value)){
+            alert("휴대폰 번호를 확인해주시기 바랍니다.");
+            f.userCel.focus();
+            return false;
+        }
+        
+        if(f.userEmail.value == ''){
+            alert("이메일을 입력하시기 바랍니다.");
+            f.userEmail.focus();
+            return false;
+        }
+        
+        if(f.userZipcode.value == ''){
+            alert("우편번호을 입력하시기 바랍니다.");
+            f.userZipcode.focus();
+            return false;
+        }
+        
+        if(f.userAddress.value == ''){
+            alert("주소를 입력하시기 바랍니다.");
+            f.userAddress.focus();
+            return false;
+        }
+
+        if(f.userDetailAddr.value == ''){
+            alert("상세주소를 입력하시기 바랍니다.");
+            f.userDetailAddr.focus();
+            return false;
+        }
+     
+        if(f.dataContent.value == ''){
+            alert("방문 세부일정을 입력하시기 바랍니다.");
+            f.dataContent.focus();
+            return false;
+        }
+   
+        if(f.tmpField1.value == '개인' ) {
+        	$("#tmpField20").val("1");
+        }else if(f.tmpField1.value = '단체') {
+        	if(f.tmpField20.value == ''){
+	        	alert("예약인원을 확인해주세요.")
+        		$("#tmpField20").focus();
+	        	return false;
+        	}
+        }
+        return true;
+    }
+    
+    // TODO : 전화번호 포맷 체크
+    function chkTelNum(num) {
+    	var regEx = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+    	if(regEx.test(num) == true){
+    		return false;
+    	}
+    	return true;
+    }
+		
+	// 우편번호 
+    function fn_execute_daum_postcode( zId, aId1, aId2 ) {
+        daum.postcode.load(function(){
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    var fullRoadAddr = data.roadAddress;
+                    var extraRoadAddr = '';
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraRoadAddr += data.bname;
+                    }
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if(extraRoadAddr !== ''){
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+                    if(fullRoadAddr !== ''){
+                        fullRoadAddr += extraRoadAddr;
+                    }
+                    document.getElementById( zId ).value = data.zonecode;
+                    document.getElementById( aId1 ).value = fullRoadAddr;
+                    document.getElementById( aId2 ).focus();
+                }
+            }).open();
+        });
+    }
+    
+    
+    //]]>
+</script>
+<%
+    } catch (NullPointerException e) {
+        out.println("데이터 출력중 오류가 발생하였습니다.");
+    }	catch (IllegalArgumentException e) {
+        out.println("데이터 형태가 맞지않습니다.");
+    }
+%>
+<%!
+    private String cleanXSS(String s) {
+        s = s.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+        s = s.replaceAll("\\(", "&#40;").replaceAll("\\)", "&#41;");
+        s = s.replaceAll("'", "&#39;");
+        s = s.replaceAll("eval\\((.*)\\)", "");
+        s = s.replaceAll("javascript", "");
+        s = s.replaceAll("%22", "");
+        s = s.replaceAll("%27", "");
+        s = s.replaceAll("%3B", "");
+        s = s.replaceAll("eval", "");
+        s = s.replaceAll("--", "");
+        s = s.replaceAll("AppScan", "");
+        s = s.replaceAll("Probe", "");
+        s = s.replaceAll("iframe", "");
+
+        if(s.toLowerCase().contains("script") == true || s.toLowerCase().contains(" and ") == true ||  s.toLowerCase().contains("xss") == true || s.toLowerCase().contains("drop") == true ||  s.toLowerCase().contains("exec") == true || s.toLowerCase().contains(" or ") == true) {
+            s = "";
+        }
+
+        return s;
+    }
+	
+%>                        
