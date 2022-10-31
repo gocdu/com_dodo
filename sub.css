@@ -435,7 +435,6 @@ p.caution_red::before {content:''; display:block; width:1.8rem; height:1.8rem; b
 .course_list .course_con .ccon p.tit {font-weight:600; font-size:2.2rem; font-family: 'GmarketSans'; margin-bottom:2.0rem;}
 .course_list .course_con .ccon p.loca {background:url(/images/main/sec1_lo_icon03.png) no-repeat 0 0.4rem; padding-left:15px; margin-bottom:2.0rem;}
 .course_list .course_con .ccon p.copy {margin-bottom:2.0rem;}
-.course_list .course_con .ccon .cbtn {}
 .course_list .course_con .ccon .cbtn a {border-radius:30px; background:#f7f7f7; font-size:1.5rem; padding:1.1rem 3.0rem; display:inline-block; transition:all .2s; color:#000;}
 .course_list .course_con .ccon .cbtn a:hover {background:#333; color:#fff;}
 @media all and (max-width:1024px) {
