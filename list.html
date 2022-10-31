@@ -1,0 +1,164 @@
+<%@ page import="egovframework.rfc3.iam.security.userdetails.util.EgovUserDetailsHelper"%>
+<%@ page import="java.util.*, egovframework.rfc3.board.vo.BoardVO,egovframework.rfc3.board.vo.BoardCategoryVO"%>
+<%@ page import="egovframework.rfc3.board.vo.BoardCategoryVO"%>
+<%@ page import="egovframework.rfc3.common.util.EgovStringUtil"%>
+<%@ page import="egovframework.rfc3.common.util.HtmlUtil"%>
+<%@ page import="egovframework.rfc3.common.util.CommonUtil"%>
+<%@ page import="egovframework.rfc3.common.util.EgovDateUtil"%>
+<%@ page import="egovframework.rfc3.board.vo.BoardFileVO, egovframework.rfc3.menu.vo.MenuVO"%>
+<%@ page import="egovframework.rfc3.iam.security.userdetails.util.EgovUserDetailsHelper"%>
+<%!
+public String removeTag(String html) throws Exception {
+	return html.replaceAll("<[^>]*>", "");
+//	return html.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+}
+
+%>
+<%
+BoardVO boardvo = bm.getBoardVO();
+List<BoardCategoryVO> categoryList1 = bm.getCategoryList1();	
+List<BoardCategoryVO> categoryList2 = bm.getCategoryList2();	
+List<BoardCategoryVO> categoryList3 = bm.getCategoryList3();
+bm.isAdminListSet(false);
+
+%>
+<h3><span><%=cm.getMenuNm() %></span></h3>
+
+<div class="board_search">
+    <form action="<%=request.getContextPath() %>/board/list.<%=bm.getUrlExt()%>" method="get">
+        <input type="hidden" name="menuCd" value="${menuCd}" />
+        <input type="hidden" name="listCel" value="<%=bm.getListCel()%>" />
+        <input type="hidden" name="boardId" value="<%=bm.getBoardId()%>" />
+        <fieldset>
+            <legend>조건검색</legend>
+    
+            <div class="bbs_search3">
+                <div class="board_search_info"><p class="bbs_total total">총 <span><%=bm.getDataCount()%></span>개의 게시물이 등록되어 있습니다. 
+                    <!-- (<span><%=bm.getPageNum()%></span>/<%=bm.getPageCount()%> 페이지) --></p></div>
+                <div class="board_search_con">
+    <%if(bm.getMenuIsBoard1Cate()){%>
+                    <select name="categoryCode1" class="select" id="categoryCode1" title="조건검색-1차카테고리" >
+                        <option value="">1차카테고리 선택</option>
+    <%				for(BoardCategoryVO cate : categoryList1){%>
+                        <option value="<%=cate.getCategoryCode()%>" <%=bm.getSearchCategoryCode1() !=null && bm.getSearchCategoryCode1().equals(cate.getCategoryCode()) ? "selected=\"selected\"" : ""%>><%=cate.getCategoryName()%></option>
+    <%				} %>
+    
+                    </select>
+    <%	}else{ %>
+                <input type="hidden" name="categoryCode1" value="<%=bm.getSearchCategoryCode1()%>" />
+    <%	} %>
+    <%if(bm.getMenuIsBoard2Cate()){%>
+                    <select name="categoryCode2" class="select" id="categoryCode2" title="조건검색-2차카테고리">
+                        <option value="">2차카테고리 선택</option>
+    <%					for(BoardCategoryVO cate : categoryList2){%>
+                        <option value="<%=cate.getCategoryCode()%>" <%=bm.getSearchCategoryCode2() !=null && bm.getSearchCategoryCode2().equals(cate.getCategoryCode()) ? "selected=\"selected\"" : ""%>><%=cate.getCategoryName()%></option>
+    <%					} %>
+                    </select>
+    <%	}else{ %>
+                <input type="hidden" name="categoryCode2" value="<%=bm.getSearchCategoryCode2()%>" />
+    <%	} %>
+                    <select class="select" name="searchType">
+                    <option value="DATA_TITLE" <%="DATA_TITLE".equals(bm.getSearchType()) ? "selected=\"selected\"":""%>>제목</option>
+                    <option value="DATA_CONTENT" <%="DATA_CONTENT".equals(bm.getSearchType()) ? "selected=\"selected\"":""%>>내용</option>
+                    <option value="USER_NICK" <%="USER_NICK".equals(bm.getSearchType()) ? "selected=\"selected\"":""%>>작성자</option>
+                    </select>
+                    <input type="text" class="form_txt" id="keyword" name="keyword" value="<%=bm.getKeyword()%>" title="검색어" autocomplete="off" placeholder="검색어를입력하세요">
+                    <input type="submit" value="검색" class="form_sm" >
+                    <select class="select list_nn" title="글목록 수 선택" name="listRow">
+                        <option selected="selected">글목록 수 선택</option>
+                        <option value="10" <%=bm.getListRow() == 10 ? "selected=\"selected\"" :""%>>10</option>
+                        <option value="20" <%=bm.getListRow() == 20 ? "selected=\"selected\"" :""%>>20</option>
+                        <option value="30" <%=bm.getListRow() == 30 ? "selected=\"selected\"" :""%>>30</option>
+                        <option value="50" <%=bm.getListRow() == 50 ? "selected=\"selected\"" :""%>>50</option>
+                        <option value="100" <%=bm.getListRow() == 100 ? "selected=\"selected\"" :""%>>100</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+	
+
+<div class="board-list-wrap">
+	<div>
+		<table> <!-- 넓이 조절 css못찾음 -->
+			<caption><strong><%=cm.getMenuNm()%> 게시물 목록</strong>으로 <% for(int i=0;i<bm.listItemCount();i++){ %><%=bm.getItemName(i)%><%=(i+1) == bm.listItemCount() ? "":","%><% } %>등을 제공</caption>
+			<colgroup>
+<%
+		for(int i=0;i<bm.listItemCount();i++){	%>
+			<col <%=bm.getItemWidth(i) != null && !"0".equals(bm.getItemWidth(i) ) ? "style='width:"+bm.getItemWidth(i)+"%'"  : ""%>/>
+<%		}%>	
+			</colgroup>
+			<thead>
+			<tr>
+<%
+		for(int i=0;i<bm.listItemCount();i++){%>
+				<th><%=bm.getItemName(i)%></th>
+<%		}	%>
+			</tr>
+			</thead>
+			<tbody>
+<%		if(bm.getListCount() == 0){%>
+			<tr class="list_none">
+				<td colspan="<%=bm.listItemCount()%>"><%=bm.getEmptyMessage()%></td>
+			</tr>
+<%		} %>
+<%		for(int i=0; i<bm.getListCount(); i++) {
+			BoardDataVO dataVO = bm.getBoardDataVOList(i);
+			bm.setDataVO(dataVO);
+			List<BoardDataVO> replyList = bm.getBoardReplyDataList(bm.getDataIdx());
+%>
+			<tr>
+<%			for(int k=0;k<bm.listItemCount();k++){
+				if(bm.getItemField(k).equals("DATA_TITLE")){
+%>
+				<td data-cell-header="<%=bm.getItemName(k)%> :" class="title"><a href="/board/view.<%=cm.getUrlExt()%>?boardId=<%=bm.getBoardId()+bm.getToViewParam().replaceAll(" DESC",":DESC").replaceAll(" ASC",":ASC")%>"><%=bm.isSecret() ? "&nbsp;&nbsp;<img src=\"/images/01_portal/bbs/icon_lock.gif\" alt=\"비공개\">" : ""%><%=bm.getDataTitle()%></a></td>
+<%
+					continue;
+				}else if(bm.getItemField(k).indexOf("FILE_ICON") >= 0){
+%>
+				<td data-cell-header="<%=bm.getItemName(k)%> :">
+				<% if(bm.getFileCount() > 1){%>
+				<a href="/board/view.<%=cm.getUrlExt()%>?boardId=<%=bm.getBoardId()+bm.getToViewParam()%>"><img src="/images/bbs/icon_file.gif" alt="첨부파일"></a>
+				<% }else if(bm.getFileCount() == 1){%>
+				<a href="/board/download.<%=cm.getUrlExt()%>?boardId=<%=bm.getBoardId()+bm.getToViewParam()%>&amp;fileSid=<%=bm.getBoardFileVO(0).getFileSid()%>"><img src="/images/bbs/icon_file.gif" alt="첨부파일"></a>
+				<% } %>
+				</td>
+<%
+					continue;
+				}else if(bm.getItemMethod(k).equals("getCheckBox")){
+%>
+				<td data-cell-header="선택 :"><%=bm.getMethodValue(bm.getItemMethod(k),bm.getItemField(k),(Object)bm)%></td>
+<%
+				}else if(bm.getItemField(k).equals("USER_NICK") || bm.getItemField(k).equals("OFFICE_NM")){
+					String userNick = "";
+					if(bm.getExtensionValue("OFFICE_NM") != null && !"".equals(bm.getExtensionValue("OFFICE_NM"))){
+						userNick = bm.getExtensionValue("OFFICE_NM");
+					}else{
+						userNick = bm.getUserNick();
+						if(userNick.length() > 0 && !bm.isManager())
+						{
+							userNick = userNick.substring(0,1);
+							for(int m=1;m<(bm.getUserNick()).length();m++)
+							{
+								userNick += "○";
+							}
+						}
+					}
+%>
+				<td data-cell-header="<%=bm.getItemName(k)%> :"><%=userNick%></td>
+<%				}else if(bm.getItemMethod(k).equals("getDataNum")){ %>
+				<td data-cell-header="<%=bm.getItemName(k)%>" <%=bm.isNotice() ? "class=\"notice\"":""%>><% if(bm.isNotice()){%> <span>[공지]</span><%}else{%><%=bm.getMethodValue(bm.getItemMethod(k),bm.getItemField(k),(Object)bm)%><% }%></td>
+<%				}else{%>
+				<td data-cell-header="<%=bm.getItemName(k)%> :"><%=bm.getMethodValue(bm.getItemMethod(k),bm.getItemField(k),(Object)bm)%></td>
+<%				}
+			}
+%>
+			</tr>
+<%	} %>
+			</tbody>
+		</table>
+	</div>
+	<p class="pageing"><%=bm.getPaging("prev2","prev","","on","next","next2",boardvo.getBoardPageBlock()) %></p>
+	<p class="bbs_btn"><%=bm.getWriteBtn("글쓰기").replace("<a ","<a class='bbs_bt2' ")%></p>
+</div>                                                                            
