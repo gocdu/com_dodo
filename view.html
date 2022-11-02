@@ -1,0 +1,187 @@
+<%@ page import="egovframework.rfc3.board.vo.BoardVO"%>
+<%@ page import="egovframework.rfc3.board.vo.BoardDataVO"%>
+<%@ page import="egovframework.rfc3.board.vo.BoardFileVO"%>
+<%@ page import="egovframework.rfc3.common.util.HtmlUtil,egovframework.rfc3.common.util.EgovStringUtil"%>
+<%@ page import="egovframework.rfc3.common.util.*,egovframework.rfc3.common.util.EgovDateUtil"%>
+<%@ page import="egovframework.rfc3.menu.vo.MenuVO" %>
+<%@ page import="java.util.*"%>
+<%
+boolean mobileFl = false;
+%>
+<h3><span><%=cm.getMenuNm() %> 글보기</span></h3>
+<div class="tbl_wrap">
+	<table class="tbl tbl_board_read">
+		<caption><strong>공지사항 등록</strong>으로 제목 , 작성자 , 작성일, 조회수, 구분, 삭제일, 공지글, 내용, 파일첨부 등을 제공 또는 입력합니다.</caption>
+		<colgroup>
+			<col style="width:20%">
+			<col>
+		</colgroup>
+		<tbody>
+<%	
+	for(int a = 0; a < bm.viewItemCount(); a++){
+		if("DATA_CONTENT".equals(bm.getViewItemField(a))){
+	%>
+		<tr>
+			<th><%=bm.getViewItemName(a)%></th>
+			<td>
+				<div class="bbs_con">
+<%	
+			String imgSrc = "/images/bbs/no-img.gif";
+			String imgSrc2 = "/images/bbs/no-img.gif";
+			String imgAlt = "no image";
+			int[] imgExtArr = bm.searchFileNameExt("jpg|bmp|jpeg|gif|png|jpge");
+			if(imgExtArr.length > 0){
+				for(int xx = 0; xx < imgExtArr.length; xx++){
+					imgSrc = EgovStringUtil.isNullToString(bm.getThumbnailPath(imgExtArr[xx]));
+					imgSrc2 = EgovStringUtil.isNullToString(bm.getFilePath(imgExtArr[xx]));
+					imgAlt = EgovStringUtil.isNullToString(bm.getDataTitle())+" 이미지("+String.valueOf(xx+1)+")";
+					%>
+					<figure class="bbs_img"><img src="<%=imgSrc2%>" alt="<%=imgAlt%>"/><figcaption>&lt;<%=bm.getFileText(imgExtArr[xx]) == null ? bm.getFileName(imgExtArr[xx]) : bm.getFileText(imgExtArr[xx])%>&gt;</figcaption></figure>
+					<%
+				}
+			}
+
+%>
+			<%=CommonUtil.checkCrossAttackTextArea(bm.getDataContent())%>
+		</div>
+			</td>
+		</tr>
+<%		}else if("FILE_ICON".equals(bm.getViewItemField(a))){%>
+		<tr>
+			<th><%=bm.getViewItemName(a)%></th>
+			<td>
+<% if(bm.getFileCount() > 0){%>
+		<p class="bbs_filedown">
+<%		String filePt = "<a href=\"{fileDown}\" title=\"{fileName}\">{fileName} ({fileSize})</a>{viewerIcon}";
+		for (int f = 0; f < bm.getFileCount(); f++) {
+			BoardFileVO boardFileVO = bm.getBoardFileVO(f);
+			if (boardFileVO == null) {
+				continue;
+			}
+					// 다운로드 아이콘
+			String downIcon = bm.getFileList(boardFileVO, filePt);
+					// 문서뷰어 아이콘
+			String viewerIcon = EgovStringUtil.isNullToString(bm.getHtmlViewerIcon(boardFileVO, "", mobileFl)).replace("><img src=\"null\" alt=\"전용뷰어\"/>", " class=\"i_viwer\">바로보기");
+			downIcon = downIcon.replace("{viewerIcon}", viewerIcon);
+			out.println(downIcon);
+		}
+%>
+		</p>
+			</td>
+		</tr>
+<%	} %>
+	<%	}else{%>
+		<tr>
+			<th><%=bm.getViewItemName(a)%></th>
+			<td> <%=bm.getViewTagValue(bm.getViewItem(a))%></td>
+		</tr>
+<%	}
+}%>
+		</tbody>
+		</table>
+    </div> 
+	<div class="taR mT30"><%=bm.getViewIcons().replace("><img src=\"#\" alt=\"목록\" />","class=\"bbs_bt1\">목록").replace("><img src=\"#\" alt=\"수정\" />"," class=\"bbs_bt1\">수정").replace("><img src=\"#\" alt=\"삭제\" />"," class=\"bbs_bt1\">삭제").replace("><img src=\"#\" alt=\"답변\" />"," class=\"bbs_bt1\">답변") %></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%
+BoardManager bms = new BoardManager(request);
+List<BoardDataVO> replyList = bms.getBoardReplyDataList(bm.getDataIdx());
+if(replyList.size() > 0){
+	for(BoardDataVO replyVO : replyList){
+		bms.setBoardDataVO(replyVO);
+%>
+	<div class="bbs_reply">
+        <p class="tit"><em>답변</em><strong><%=bms.getDataTitle()%></strong></p>
+        <div class="reply_info">
+            <p><strong>답변일</strong> : <span><%=bms.getRegister_dt("yyyy-MM-dd")%></span></p>
+            <p><strong>답변자</strong> : <span><%=bms.getUserNick()%></span></p>
+
+            <% if(bms.getFileCount() > 0){%>
+                <p class="bbs_filedown">
+                <%
+                    String filePt = "<a href=\"{fileDown}\" title=\"{fileName}\">{fileName} ({fileSize})</a>{viewerIcon}";
+                    for (int f = 0; f < bms.getFileCount(); f++) {
+                        BoardFileVO boardFileVO = bms.getBoardFileVO(f);
+                        if (boardFileVO == null) {
+                            continue;
+                        }
+                        // 다운로드 아이콘
+                        String downIcon = bms.getFileList(boardFileVO, filePt);
+                        // 문서뷰어 아이콘
+                        
+                        String viewerIcon = EgovStringUtil.isNullToString(bms.getHtmlViewerIcon(boardFileVO, "", mobileFl)).replace("><img src=\"null\" alt=\"전용뷰어\"/>", " class=\"i_viwer\">바로보기");
+                        downIcon = downIcon.replace("{viewerIcon}", viewerIcon);
+                        out.println(downIcon);
+                    }
+                %>
+                </p>
+            <% } %>
+        </div>
+
+
+
+			<div class="reply_con">
+                <!-- //답글에는 첨부의 이미지를 보여주지 않도록 함 -->
+<!-- <%	
+			String imgSrc_1 = "/images/bbs/no-img.gif";
+			String imgSrc2_1 = "/images/bbs/no-img.gif";
+			String imgAlt_1 = "no image";
+			int[] imgExtArr2 = bms.searchFileNameExt("jpg|bmp|jpeg|gif|png|jpge");
+			if(imgExtArr2.length > 0){
+				for(int xx = 0; xx < imgExtArr2.length; xx++){
+					imgSrc_1 = EgovStringUtil.isNullToString(bms.getThumbnailPath(imgExtArr2[xx]));
+					imgSrc2_1 = EgovStringUtil.isNullToString(bms.getFilePath(imgExtArr2[xx]));
+					imgAlt_1 = EgovStringUtil.isNullToString(bms.getDataTitle())+" 이미지("+String.valueOf(xx+1)+")";
+					%>
+					<figure class="bbs_img"><img src="<%=imgSrc2_1%>" alt="<%=imgAlt_1%>"/><figcaption>&lt;<%=bms.getFileText(imgExtArr2[xx]) == null ? bms.getFileName(imgExtArr2[xx]) : bms.getFileText(imgExtArr2[xx])%>&gt;</figcaption></figure>
+					<%
+				}
+			}
+
+%> -->
+				<%=CommonUtil.checkCrossAttackTextArea(bms.getDataContent())%>
+			</div>
+	
+
+
+
+
+		<div class="reply_btn">
+            <%=bms.getViewIcons().replace("><img src=\"#\" alt=\"수정\" />"," class=\"bbs_bt1\">수정").replace("><img src=\"#\" alt=\"삭제\" />"," class=\"bbs_bt1\">삭제") %></div>
+	</div>
+<%		}
+}%>
+ 
+
+<script>
+$(document).ready(function(){
+	function imgre(){
+		$(".script_box img").each(function () {
+			var w = $(this).width();//width 구하기 
+			var h = $(this).height();//height 구하기 
+			if(w > $(".bbs_skin").width()){
+				w = $(".bbs_skin").width() - 20;
+			}
+			$(this).aeImageResize({ height: w, width: w });
+		}); 
+	}
+	$(window).resize(function(){
+		imgre();
+	});
+	imgre();
+});
+</script>                                                                                                                                                                                                                     

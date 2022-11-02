@@ -1,5 +1,32 @@
 $(document).ready(function() {
 
+
+    var url = document.location.href;
+    var query = window.location.search;
+    var param = new URLSearchParams(query);
+    var menuCd = param.get('menuCd');
+    console.log(menuCd);
+    var subtopImg = document.querySelector('.subtop_visual');
+
+    if (menuCd.indexOf('DOM_000000101') === 0 ) {
+        subtopImg.className += ' sub01';
+    } else if (menuCd.indexOf('DOM_000000102') === 0 ) {
+        subtopImg.className += ' sub02';
+    } else if (menuCd.indexOf('DOM_000000103') === 0 ) {
+        subtopImg.className += ' sub03';
+    } else if (menuCd.indexOf('DOM_000000104') === 0 ) {
+        subtopImg.className += ' sub04';
+    } else if (menuCd.indexOf('DOM_000000105') === 0 ) {
+        subtopImg.className += ' sub05';
+    } else if (menuCd.indexOf('DOM_000000106') === 0 ) {
+        subtopImg.className += ' sub06';
+    } else {
+        subtopImg.className += ' sub01';
+    }
+
+
+
+
     var subnav = $('.subnav');    
     $(window).scroll(function() {
         var scrollHeight = $(window).scrollTop();
@@ -235,3 +262,5 @@ $(document).ready(function() {
     });
 
 });
+
+

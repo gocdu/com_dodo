@@ -55,11 +55,25 @@ header nav > ul > li > ul > li > ul > li > a > span {padding-left:10px;}
 
 /* 서브상단 */
 .subtop_visual {position:relative; height:365px; width:100%; background-repeat:no-repeat; background-position:50% 0; background-size:cover; z-index:1000;}
+.subtop_visual {background-image:url(/images/common/subtop_02.jpg);}
+.subtop_visual.sub01 {background-image:url(/images/common/subtop_01.jpg);}
 .subtop_visual.sub02 {background-image:url(/images/common/subtop_02.jpg);}
+.subtop_visual.sub03 {background-image:url(/images/common/subtop_03.jpg);}
+.subtop_visual.sub04 {background-image:url(/images/common/subtop_04.jpg);}
+.subtop_visual.sub05 {background-image:url(/images/common/subtop_05.jpg);}
+.subtop_visual.sub06 {background-image:url(/images/common/subtop_06.jpg);}
+
+
+
+
+
+
+
 .subtop_visual h2 {text-align:center; font-family: 'SANJUGotgam'; font-size:4.5rem; color:#fff; padding-top:125px; line-height:1em;}
 .subtop_visual .subnav { position:absolute; bottom:0; left:0; background:rgba(0,96,195,0.8); width:100%;}
 .subtop_visual .subnav > div {display:flex; flex-direction: row;}
 .subtop_visual .subnav > div > div {position:relative; color:#fff; }
+.subtop_visual .subnav > div > div > a {color:#fff; }
 .subtop_visual .subnav > div > div:after {content:''; width:1px; height:20px; background:rgba(255,255,255,0.4); position:absolute; top:calc(50% - 10px); right:0;}
 .subtop_visual .subnav > div > div:last-child:after {display:none; }
 .subtop_visual .subnav > div > div p.currentmenu {line-height:75px; width:300px; padding:0 30px; position:relative; cursor:pointer;}
@@ -101,3 +115,4 @@ footer .info_wrap p.copyright {color:rgba(255,255,255,0.5);}
     footer .info_wrap .flogo {display:none;}
 }
              
+                     
