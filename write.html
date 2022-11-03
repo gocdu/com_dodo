@@ -1,0 +1,237 @@
+<%@ page import="java.util.*, egovframework.rfc3.board.vo.BoardVO, egovframework.rfc3.board.vo.BoardCategoryVO"%>
+<%@ page import="egovframework.rfc3.user.vo.UserManageVO,egovframework.rfc3.common.util.EgovDateUtil"%>
+<%@ page import="egovframework.rfc3.office.vo.OfficeVO,egovframework.rfc3.office.vo.OfficePartVO"%>
+<%@ page import="egovframework.rfc3.common.util.*,egovframework.rfc3.common.util.EgovDateUtil"%>
+<%
+	List<BoardCategoryVO> categoryList1 = bm.getCategoryList1();
+	List<BoardCategoryVO> categoryList2 = bm.getCategoryList2();
+	List<BoardCategoryVO> categoryList3 = bm.getCategoryList3();
+	String command = bm.getCommand();
+%>
+<script>	
+jQuery.browser = {};
+(function () {
+    jQuery.browser.msie = false;
+    jQuery.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+    }
+})();
+jQuery(function($) {
+$.datepicker.setDefaults({
+        dateFormat: 'yymmdd',
+        prevText: '이전 달',
+        nextText: '다음 달',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        showMonthAfterYear: true,
+        yearSuffix: '년'
+    });
+	$('#register_dt,#start_dt, #end_dt').datepicker({
+		yearRange: '2009:2020',
+		// buttonText:'선택',
+		altField: '#datepicker', 
+		altFormat: 'yy-mm-dd (D)',
+		dateFormat: 'yy-mm-dd',
+		defaultDate: '+0m+0d' 
+	});
+	
+});
+</script>
+<script>	
+	function formSubmit(f)	{	
+<%
+	for(int a = 0 ; a < bm.writeItemCount(); a++){
+		if("Y".equals(bm.getWriteItem(a).getFieldNeUse())){
+			String ti = "입력";
+			if("I".equals(bm.getWriteItem(a).getExtensionType()) || "T".equals(bm.getWriteItem(a).getExtensionType())){
+				ti = "입력";
+			}else if("C".equals(bm.getWriteItem(a).getExtensionType()) ||  "R".equals(bm.getWriteItem(a).getExtensionType()) || "S".equals(bm.getWriteItem(a).getExtensionType())){
+				ti = "선택";				
+			}
+			if("DATA_CONTENT".equals(bm.getWriteItemField(a))){%>
+			if(CKEDITOR.instances.<%=bm.getWriteItem(a).getExtensionDefault()%>.getData() == '')
+			{
+				alert("<%=bm.getWriteItemName(a)%>을 <%=ti%>하시기 바랍니다.");
+				CKEDITOR.instances.<%=bm.getWriteItem(a).getExtensionDefault()%>.focus();
+				return false;
+			}			
+<%			}else{
+%>		
+		if(f.<%=bm.getWriteItem(a).getExtensionDefault()%>.value == '')
+		{
+			alert("<%=bm.getWriteItemName(a)%>을 <%=ti%>하시기 바랍니다.");
+			f.<%=bm.getWriteItem(a).getExtensionDefault()%>.focus();
+			return false;
+		}	
+<%			}
+		}
+	}
+%>	
+<%		if (bm.isCclViewFl()) {%>
+		if(!($('input:radio[name=rgt_type_code]').is(':checked')))
+		{
+			alert("공공누리 유형을 선택해주세요!");
+			f.rgt_type_code[0].focus();
+			return false;
+		}
+<%		}%>
+		f.submit();
+	}
+</script>
+<script  src="<%=request.getContextPath() %>/ckeditor4/ckeditor.js"></script> 
+<h3><span><%=cm.getMenuNm() %> 글쓰기</span></h3>
+
+
+<div class="board_basic_box">
+    <p class="bo_caution">정보유지 시간은 로그인 후로 15분입니다. 정보유지 시간 내에 작성을 완료해 주시기 바랍니다.</p>
+    <p class="caution"><span>표시된 항목은 필수 입력 항목입니다.</span></p>
+</div>
+
+
+<div class="board-write-wrap bbs_skin">
+	
+	<form onsubmit="formSubmit(this); return false;" name="form" method="post" action="<%=request.getContextPath() %>/board/<%=bm.getCommand() != null && bm.getCommand().equals("update") ? "updateAct" : "writeAct"%>.<%=bm.getUrlExt()%>" enctype="multipart/form-data">
+		<input type="hidden" name="orderBy" value="<%=bm.getOrderBy()%>" />
+		<input type="hidden" name="boardId" value="<%=bm.getBoardId()%>" />
+		<input type="hidden" name="searchStartDt" value="<%=bm.getSearchStartDt()%>" />
+		<input type="hidden" name="searchEndDt" value="<%=bm.getSearchEndDt()%>" />	
+		<input type="hidden" name="menuCd" value="${menuCd}" />
+		<input type="hidden" name="contentsSid" value="${contentsSid}" />
+		<input type="hidden" name="command" value="<%=bm.getCommand() %>"/>
+		<input type="hidden" name="startPage" value="<%=bm.getPageNum() %>"/>
+		<input type="hidden" name="pcode" value="<%=bm.getPcode() %>"/>
+<%		if(bm.getCommand() != null && (bm.getCommand().equals("update") || bm.getCommand().equals("reply"))){
+			%>			
+		<input type="hidden" name="dataSid" value="<%=bm.getDataSid() %>"/>			
+<%		}	%>
+		<fieldset>
+			<legend>게시글 등록</legend>
+			<table class="bbs_table bbs_write">
+				<caption><strong>공지사항 등록</strong>으로 제목 , 작성자 , 작성일, 조회수, 구분, 삭제일, 공지글, 내용, 파일첨부 등을 제공 또는 입력합니다.</caption>
+				<colgroup>
+					<col style="width:20%">
+					<col>
+				</colgroup>
+				<tbody>
+<%	for(int a = 0 ; a < bm.writeItemCount(); a++){
+		if("DATA_TITLE".equals(bm.getWriteItemField(a))){%>
+					<tr>
+						<th scope="row"><label for="<%=bm.getWriteItem(a).getExtensionDefault()%>"><%="Y".equals(bm.getWriteItem(a).getFieldNeUse()) ?"<span class=\"w_star\">*</span>":""%><%=bm.getWriteItemName(a)%></label></th>
+						<td><input type="text" id="dataTitle" name="dataTitle" value="<%=bm.getDataTitle() %>" class="input_wf" autocomplete="off"></td>
+					</tr>
+<%		}else if("USER_NICK".equals(bm.getWriteItemField(a))){%>
+					<tr>
+						<th scope="row"><label for="<%=bm.getWriteItem(a).getExtensionDefault()%>"><%="Y".equals(bm.getWriteItem(a).getFieldNeUse()) ?"<span class=\"w_star\">*</span>":""%><%=bm.getWriteItemName(a)%></label></th>
+						<td>
+<%
+					if(!bm.isManager())
+					{
+						if(bm.getCommand() != null && "update".equals(bm.getCommand()))
+						{
+							%>
+							<input type="hidden" name="userNick" id="userNick" value="<%=bm.getUserNick() %>" /><%=bm.getUserNick() %>
+							<%
+						}else{
+							if(bm.getSUserName() != null && !"".equals(bm.getSUserName())){%>
+							<input type="text" name="userNick" id="userNick" value="<%=bm.getSUserName()%>" class="input_wm mr10"/>
+					<%
+							}else{
+							%>
+								<input type="text" name="userNick" id="userNick"  value="" class="input_wm mr10"/>
+								<%
+							}
+						}
+					}else{
+						if(bm.getCommand() != null && "update".equals(bm.getCommand()))
+						{
+							%>
+							<input type="text" name="userNick" id="userNick" value="<%=bm.getUserNick() %>" class="input_wm mr10"/>
+							<%
+						}else{
+							%>
+							<input type="text" name="userNick" id="userNick"  value="<%=bm.getSUserName()%>" class="input_wm mr10" />
+							<%
+						}						
+					}
+					%>	
+						</td>
+					</tr>
+<%		}else if("DATA_CONTENT".equals(bm.getWriteItemField(a))){%>
+					<tr>
+						<th scope="row"><label for="dataContent"><%="Y".equals(bm.getWriteItem(a).getFieldNeUse()) ?"<span class=\"w_star\">*</span>":""%><%=bm.getWriteItemName(a)%></label></th>
+						<td>
+						<textarea id="dataContent" name="dataContent" cols="100" rows="10" class="input_wf" style="height: 300px;"><%=CommonUtil.checkCrossAttackTextArea(bm.getDataContent())%></textarea>
+						<script>
+							$(document).ready(function() {
+								CKEDITOR.replace('dataContent');
+							});
+						</script>	
+						</td>
+					</tr>
+<%		}else if("FILE_ICON".equals(bm.getWriteItemField(a))){%>
+					<tr>
+						<th scope="row"><%="Y".equals(bm.getWriteItem(a).getFieldNeUse()) ?"<span class=\"w_star\">*</span>":""%><%=bm.getWriteItemName(a)%></th>
+						<td>
+							<span class="fc_red">※ 파일 용량은 최대 <%=bm.getBoardFileSizeCf()%>mb까지 등록 가능합니다.<br>※ 이미지 첨부파일을 첨부하실때는 이미지에 대한 설명을 넣어주세요.</span>
+							<!--선택사용 : 이미지 설명 있음-->
+<%
+				for(int i=0; i<bm.getMaxFileCount()-bm.getFileCount(); i++){%>
+								<p class="bw_file mT5" style="border-top:1px dotted #ddd; padding-top:10px; margin-top:10px;"><input type="file" id="fileup<%=i%>" name="upload" class="input_wl" title="첨부파일<%=i+1%>"/></p>
+                                <p class="bw_file mT5"><label for="img_info<%=i%>" style="width:100px; display:inline-block;">이미지 설명</label><input id="img_info<%=i%>" type="text" name="fileMemo" style="font-size:1.4rem; width:calc(100% - 100px);"></p>
+<%				} %>
+						</td>
+					</tr>
+					<!--수정할 때 s-->
+<%				if(bm.getCommand() != null && bm.getCommand().equals("update")){%>
+					<tr>
+						<th scope="row"><%=bm.getWriteItemName(a)%></th>
+						<td>
+							<div class="file_link">
+								<%=bm.getFileList("<img src=\"/images/bbs/icon_file.gif\" alt=\"첨부파일 있음\">{fileName}({fileSize})<button  onclick=\"if(confirm('선택한 첨부파일을 삭제 하시겠습니까?')){ location.href='{fileDelete}'; return false; }else{ return false;}\">삭제</button><br>")%>
+							</div>
+						</td>
+					</tr>
+<%				} %>
+<%		}else{%>
+				<tr>
+					<th scope="row"><label for="<%=bm.getWriteItem(a).getExtensionDefault()%>"><%="Y".equals(bm.getWriteItem(a).getFieldNeUse()) ?"<span class=\"w_star\">*</span>":""%><%=bm.getWriteItemName(a)%></label></th>
+					<td>
+					<%=bm.getWriteTag(bm.getWriteItem(a),bm.getWriteItem(a).getExtensionDefault(),"input_wf","","autocomplete='off'")%>
+					</td>
+				</tr>
+<%		}
+	} %>
+<%
+		if (bm.isCclViewFl()) {
+			String itemValue = "";
+			// 수정상태일 시 && 원본글일 시
+			if (command.equals("update") && bm.getDataDep() == 1) {
+				BoardDataVO boardDataVO = bm.getBoardDataVO(bm.getDataSid());
+				itemValue = boardDataVO.getRgt_type_code();
+			}
+			%>
+					<tr>
+						<th scope="row">게시물 저작권표시<br>(공공누리)</th>
+						<td>
+							<div class="ggong">
+			                  <ul>
+								<li><input type="radio" title="공공누리 심벌마크(제1유형)" value="1" <%=itemValue.equals("1") ? " checked" : ""%>><img src="/images/common/open01.jpg" alt="공공누리 심벌마크(제1유형)">공공누리 심벌마크(제1유형) 출처표시</li>
+								<li><input type="radio" title="공공누리 심벌마크(제2유형)" value="2" <%=itemValue.equals("2") ? " checked" : ""%>><img src="./images/common/open02.jpg" alt="공공누리 심벌마크(제2유형)">공공누리 심벌마크(제2유형) 출처표시+상업적이용금지</li>
+								<li><input type="radio" title="공공누리 심벌마크(제3유형)" value="3" <%=itemValue.equals("3") ? " checked" : ""%>><img src="/images/common/open03.jpg" alt="공공누리 심벌마크(제3유형)">공공누리 심벌마크(제3유형) 출처표시+변경금지</li>
+								<li><input type="radio" title="공공누리 심벌마크(제4유형)" value="4" <%=itemValue.equals("4") ? " checked" : ""%>><img src="/images/common/open04.jpg" alt="공공누리 심벌마크(제4유형)">공공누리 심벌마크(제4유형) 출처표시+상업적이용금지+변경금지</li>
+							</ul>
+							</div>
+						</td>
+					</tr>
+<%		} %>
+				</tbody>
+			</table>
+			<p class="taR mT40"><%=bm.getWriteIcons().replace("><img src=\"#\" alt=\"취소\" />","class=\"bbs_bt1\">취소").replace("<input type=\"image\" src=\"#\" alt=\"확인\" title=\"확인\" />","<a href=\"#\" class=\"bbs_bt2\" onclick=\"formSubmit(document.form); return false\">확인</a>") %></p>
+		</fieldset>
+	</form>
+</div>                                                                                                                                                                                                                                                     

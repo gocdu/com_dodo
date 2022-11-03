@@ -94,8 +94,9 @@ select[disabled="disabled"]{background:#ebebeb;color:#959595; }
 
 /* form base style */
 input{ border:solid 1px #dedede;}
+input[type=image] {border:0!important;}
 input[type=radio],input[type=checkbox]{vertical-align: middle;margin-right: 3px;}
-input[type=text],input[type=passward] {height: 40px;-webkit-appearance:none;}
+input[type=text],input[type=passward] {height: 4.0rem;-webkit-appearance:none;}
 input[type=button],input[type=submit] {cursor: pointer; -webkit-appearance:none;  }
 select {border:solid 1px #bbb; background:#fff url('/portal/images/common/selarr_btn.png')no-repeat right 50%; height: 40px; padding-left:10px;
 	-webkit-appearance: none;
@@ -110,7 +111,7 @@ select::-ms-expand {
     display: none;
  }
  
-textarea{min-height:80px;padding:1rem;border:solid 1px #ddd;line-height:120%;font-size:inherit;font-family:inherit;}
+textarea{min-height:8.0rem;padding:1rem;border:solid 1px #ddd;line-height:120%;font-size:inherit;font-family:inherit;}
 
 /* placeholder */
 ::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */color: #666;/* Firefox */}
