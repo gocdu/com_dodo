@@ -161,7 +161,8 @@ if(replyList.size() > 0){
 
 
 		<div class="reply_btn">
-            <%=bms.getViewIcons().replace("><img src=\"#\" alt=\"수정\" />"," class=\"bbs_bt1\">수정").replace("><img src=\"#\" alt=\"삭제\" />"," class=\"bbs_bt1\">삭제") %></div>
+			<div class="hiddenBtn" style="display: none;"><%=bms.getViewIcons().replace("><img src=\"#\" alt=\"수정\" />"," class=\"bbs_bt1\">수정").replace("><img src=\"#\" alt=\"삭제\" />"," class=\"bbs_bt1\">삭제") %></div>
+		</div>
 	</div>
 <%		}
 }%>
@@ -169,6 +170,14 @@ if(replyList.size() > 0){
 
 <script>
 $(document).ready(function(){
+	// 버튼 다시 셋팅
+	setNewReplyBtn();
+
+	// 기존 버튼으로 보이려면 setNewReplyBtn(); 주석처리하고 아래 주석해제
+// 	$(".hiddenBtn").each(function(index, item) {
+// 	  $(item).contents().unwrap();
+// 	});
+	
 	function imgre(){
 		$(".script_box img").each(function () {
 			var w = $(this).width();//width 구하기 
@@ -184,4 +193,54 @@ $(document).ready(function(){
 	});
 	imgre();
 });
-</script>                                                                                                                                                                                                                     
+
+function setNewReplyBtn() {
+	// 버튼 새로생성 - 이미지 변경용
+	$(".hiddenBtn").each(function(divIdx, btnDiv) {
+		var btnStr = "";
+		$(btnDiv).find("a").each(function(btnIdx, btn) {
+			var alt = $(btn).find("img").attr("alt");
+			var attr = getAttributes($(btn));
+			var aclass = "";
+			
+
+
+			// 원하는 이미지 변경 및 속성 추가
+			switch(alt) {
+				case "수정" : 
+						aclass = "수정";
+						attr += "class='re-bt'";
+					break;
+				case "삭제" : 
+						aclass = "삭제";
+						attr += "class='rd-bt'";
+					break;
+				default : break;
+			}
+			
+			//목록 버튼은 생성하지 않음
+			if(alt == "목록" || alt == "답변") {
+				return true;
+			} else {
+				btnStr += "<a " + attr + ">";
+				btnStr += aclass;
+				btnStr += "</a>";
+			}
+		});
+		$(btnDiv).parent().append(btnStr);
+	});
+	
+	$(".hiddenBtn").remove();
+}
+
+// 태그의 속성 텍스트로 출력
+function getAttributes($node) {
+	var result = "";
+	$.each($node[0].attributes, function ( index, attribute ) {
+		attribute.value = attribute.value.replace(/'/gi, '`');
+		result += attribute.name + "='" + attribute.value + "' ";
+	});
+	
+	return result;
+}
+</script>                                                                                                                                                                                                                                                       
