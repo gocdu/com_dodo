@@ -129,6 +129,8 @@
     .board-list-wrap table tbody td{display:inline-block; text-align:left;border-bottom:none; padding:1.0rem;}
     .board-list-wrap table tbody td.l{ display:block;border-bottom:none; width:100%; box-sizing:border-box; }
     .board-list-wrap table tbody td.l a{white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-sizing:border-box; }
+    
+    .board-list-wrap table tbody td[data-cell-header='답변글 상태 :'],
     .board-list-wrap table tbody td[data-cell-header='조회수 :'],
     .board-list-wrap table tbody td[data-cell-header='번호'] {display:none;}
     .board-list-wrap table tbody td.title {display:block; font-weight:600; color:#000;}
