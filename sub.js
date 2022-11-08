@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 
-    var url = document.location.href;
+    /* var url = document.location.href;
     var query = window.location.search;
     var param = new URLSearchParams(query);
     var menuCd = param.get('menuCd');
@@ -22,7 +22,7 @@ $(document).ready(function() {
         subtopImg.className += ' sub06';
     } else {
         subtopImg.className += ' sub01';
-    }
+    } */
 
 
 
@@ -256,6 +256,27 @@ $(document).ready(function() {
                 breakpoint:580, 
                 settings: {
                     slidesToShow: 1
+                }
+            }
+        ]
+    });
+
+    $('.columnSlide').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplaySpeed: 3000,
+        arrows: true,
+        responsive: [    
+            {
+                breakpoint:1340, 
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint:1024, 
+                settings: {
+                    slidesToShow: 2
                 }
             }
         ]
