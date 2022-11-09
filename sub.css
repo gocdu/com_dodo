@@ -535,7 +535,7 @@ background-size: 100% 100%;}
 .column_list .column_right{width:calc(100% - 34.5rem); position:relative;}
 .column_list .column_right p.tit {font-family: 'GmarketSans'; font-size:2.2rem; color:var(--main-color); font-weight:600; margin-bottom:1.0rem;}
 .column_list .column_right p.tit.appR{margin-right:10.0rem;}
-.column_list .column_right a.application {background:#333; color:#fff; border-radius:30px; position:absolute; top:0; right:0; padding:0.5rem 1.5rem;}
+.column_list .column_right a.application {background:#333; color:#fff; border-radius:30px; position:absolute; top:-0.5rem; right:0; padding:0.5rem 1.5rem; font-size:1.5rem;}
 .column_list .column_right dl {position:relative; color:#000; }
 .column_list .column_right dl dt {background:url(/images/sub/column_dt.png) no-repeat 0 1.2rem; padding:1rem 2rem;border-bottom:2px solid #333; margin-top:3.0rem;}
 .column_list .column_right dl dt:nth-of-type(1) {margin-top:0;}
