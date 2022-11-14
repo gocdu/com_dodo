@@ -431,13 +431,17 @@
 
             var CustomOverlay = new kakao.maps.CustomOverlay({
               content: `<div class='inmapbox'><p>${positions[i].content}</p><a href="${positions[i].lURL}">바로가기</a><a href="#!" class="close"" onclick="CustomOverlay.setMap(null);"><i class="ri-close-line"></i></a></div>`,
+              clickable : true,
               map: map,
-              position: positions[i].latlng
+              position: positions[i].latlng,
+              xAnchor: 0, // 컨텐츠의 x 위치
+			        yAnchor: 0
             });
             CustomOverlay.setMap(null);
+
             kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, CustomOverlay));
-
-
+            //kakao.maps.event.addListener(marker, 'click', closeOverlay());
+            
           }
 
           // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
