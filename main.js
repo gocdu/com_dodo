@@ -1,3 +1,9 @@
+window.onload = function () {
+    setTimeout(function () {    
+    scrollTo(0,0);
+    }, 100);
+};
+
 $(document).ready(function() {
     
     var mHtml = $("html");
@@ -5,7 +11,7 @@ $(document).ready(function() {
     var scrollCurrent = $('.section_wrap .section_controll'); 
     mHtml.animate({scrollTop : '0'},10);
     var $windowWidth = window.innerWidth;
-
+    
     $(window).on("wheel", function(e) {
         
         if(mHtml.is(":animated")) return;
@@ -39,7 +45,7 @@ $(document).ready(function() {
         if(window.innerWidth > 1281) {
         var posTop =(page-1) * $(window).height();        
         mHtml.animate({scrollTop : posTop}); 
-        //console.log(page);
+        console.log(page);
         }
     };
     
@@ -130,7 +136,7 @@ $(document).ready(function() {
     coures_slide.slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 1000,
         arrows: true,
         prevArrow: '<button type="button" data-role="none" class="slick-prev" role="button"><span>PREV</span></button>',
@@ -140,14 +146,13 @@ $(document).ready(function() {
     //const sec3slide = $('.sec3slide');
 
 
-    var sec3slide = $('.sec3slide');
+ var sec3slide = $('.sec3slide');
   var $nav = $('.nav').find('li');
   var enableNav = true; //클릭하여 내비게이션 이동 허용 여부(슬라이드 동작 중 클릭되는 것을 방지)
   var speed = 1000;//슬라이드 속도
 
   sec3slide.on('init reInit', function (event, slick) {//페이징이니셜
     if(!slick.$dots) return;
-    //$("#slide_paging").html('<b class="page">'+ (slick.currentSlide+1) +'</b> / ' + (slick.$dots[0].children.length));
   }).on('beforeChange', function(event, slick, currentSlide, nextSlide){ //슬라이드 변경 시 내비 및 페이징 변경
     //내비 변경
     if(enableNav){
