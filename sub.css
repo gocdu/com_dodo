@@ -602,7 +602,6 @@ background-size: 100% 100%;}
 .inmapbox a:not(.close){ border-radius:3.0rem; color:#fff; background:#333; padding: 0.2em 1.5rem; display:inline-block; font-size:1.5rem;}
 .inmapbox a.close {position:absolute; top:1rem; right:1.0rem; width:2.0rem; height:2.0rem; border-radius:50%; background:#333;display:flex; align-items:center; justify-content: center; line-height:2.8rem;}
 .inmapbox a.close i {color:#fff; font-size:1.6rem;}
-
 @media all and (max-width:768px) {
 	.newdeal_map {height:400px;}
 }
@@ -693,3 +692,19 @@ background-size: 100% 100%;}
 @media all and (max-width:768px) {
 	.doing-area dl {width:100%; margin-bottom:1rem;}
 }
+
+
+
+.special_box {position:relative; display:flex; flex-wrap: wrap; flex-direction: row; border:1px solid #ddd; overflow: hidden;}
+.special_box .special_info {width:250px; font-family: 'GmarketSans'; box-shadow:0 0 1rem rgba(0,0,0,0.5); position:relative; z-index:1;}
+.special_box .special_map {height:600px; width:calc(100% - 250px); position:relative; z-index:0;}
+.special_box .special_info > p.tit {color:#fff; background-color:#004ea2; text-align:center; padding:2rem 1rem 1.5rem;}
+.special_box .special_info ul {display:flex; flex-direction: column; align-items: center; gap:1.5rem; margin-top:2rem;}
+.special_box .special_info ul li {background-color:#f2f2f2; border-radius:0.5rem; padding:1rem;}
+.special_box .special_info ul li p.tit {font-size:1.4rem; padding-left:2.5rem; padding-bottom:1rem;}
+.special_box .special_info ul li img {width:100%; border-radius:0.5rem;}
+.special_box .special_info ul li:nth-of-type(1) p.tit {background:url(/images/sub/mapmarker_02.png) no-repeat 0 0;}
+.special_box .special_info ul li:nth-of-type(2) p.tit {background:url(/images/sub/mapmarker_01.png) no-repeat 0 0;}
+.special_box .special_info ul li:nth-of-type(3) p.tit {background:url(/images/sub/mapmarker_03.png) no-repeat 0 0;}
+
+
