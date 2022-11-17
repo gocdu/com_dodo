@@ -41,7 +41,22 @@ $(document).ready(function() {
         $(this).parent('div').addClass('active').siblings().removeClass('active');
         $('.piclist > ul').slick('setPosition');
         $('.piclist1 > ul').slick('setPosition');
+        specialslide.slick('setPosition');
         tabtt.preventDefault();
+    });
+/* 특화경관거리 */
+    var specialslide = $('.special_slide');
+    specialslide.slick({
+        slidesToShow:1,
+        pauseOnHover: false,
+        speed: 1000,
+        arrows: true,
+        autoplaySpeed: 1500,
+        autoplay:true,
+        fade: false,
+        dots: false,
+        centerMode: false,
+        focusOnSelect: true
     });
 
 /* 이미지 슬라이드 */
