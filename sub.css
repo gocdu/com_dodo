@@ -36,13 +36,13 @@
 }
 .graybox {background:#f6f6f6; padding:4.0rem;}
 .tit_left {display:flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;}
-.tit_left .tit {font-weight:600; font-size:2.0rem; width:200px;}
-.tit_left .copy {width:calc(100% - 200px);}
+.tit_left .tit {font-weight:600; font-size:2.0rem; width:20rem;}
+.tit_left .copy {width:calc(100% - 20rem);}
 .tit_left .copy ul {width:100%; display:flex; flex-direction:row; gap:2%; flex-wrap:wrap;}
-.tit_left .copy ul li {width:32%; display:flex; flex-wrap:wrap; margin:0.3rem 0; align-items: center;  justify-content: space-between;}
-.tit_left .copy ul li strong {width:10rem; color:#fff; padding:0.5rem; background:#000; border-radius:30px; text-align:center;}
-.tit_left .copy ul li span {width:calc(100% - 11rem);}
-@media all and (max-width:1350px) {
+.tit_left .copy ul li {width:32%; display:flex; /* flex-wrap:wrap;  */margin:0.3rem 0; align-items: center;  justify-content: flex-start;}
+.tit_left .copy ul li strong {min-width:10rem; color:#fff; padding:0.5rem 1rem; background:#000; border-radius:30px; text-align:center; margin-right:1rem;}
+
+@media all and (max-width:1350px) {	
 	.tit_left .copy ul li {width:49%;}
 }
 @media all and (max-width:1024px) {
@@ -52,6 +52,7 @@
 	.graybox {padding:2.0rem;}
 	.tit_left .tit {margin-bottom:1.5rem;}
 	.tit_left .copy {width:100%;}
+
 }
 
 .picbox {position:relative;}
@@ -756,4 +757,17 @@ background-size: 100% 100%;}
 	.special_bottom .sleft img {display:none;}
 	.special_bottom .sright {width:100%;}
 	.sright > div a.tablink {font-size:1.8rem;}
+}
+
+.hw {border-radius:0.3rem; background:#727fb3; color:#fff; font-size:1.4rem; padding:0.3rem 0.5rem 0.2rem; margin-right:0.5rem;}
+.sw {border-radius:0.3rem; background:#737687; color:#fff; font-size:1.4rem; padding:0.3rem 0.5rem 0.2rem; margin-right:0.5rem;}
+
+.spe_copy {padding-left:6rem; margin-top:7rem!important;}
+.spe_copy p.spe_tit {font-size:3rem; color:#000; font-weight:600;line-height:1.4em; margin-bottom:3rem;}
+.spe_copy p.spe_tit span {position:relative;}
+.spe_copy p.spe_tit span:before {content:''; display:block; width:100%; background:#cdf3ff; height:1.5rem; position:absolute; bottom:0; left:0; z-index:0;}
+.spe_copy p.spe_tit span em {position:relative; z-index:1;}
+.spe_copy p.spe_con {line-height:2em;}
+@media all and (max-width:1024px) {
+	.spe_copy {padding-left:0;}
 }
