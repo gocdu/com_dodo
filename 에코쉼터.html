@@ -360,22 +360,18 @@
     <!-- 콘텐츠 S-->
     <div class="dv_wrap">
       <div class="conts">
-        <h3><span>좌수영성 일원 특화경관 조성</span><a href="#!" class="vr">VR보기</a></h3>        
+        <h3><span>에코쉼터</span><a href="#!" class="vr">VR보기</a></h3>        
         <div class="special_box">
           <div class="special_info">
-            <p class="tit">특화거리 정보</p>
+            <p class="tit">쉼터 정보</p>
             <ul>
               <li>
-                <p class="tit">25 의용단길-특화거리A</p>
-                <img src="/images/sub/special_01.jpg" alt="25 의용단길-특화거리A">
+                <p class="tit">수영성 에코쉼터(남문)</p>
+                <img src="/images/sub/eco_01.jpg" alt="수영성 에코쉼터(남문)">
               </li>
               <li>
-                <p class="tit">망미골목 일원-특화거리B</p>
-                <img src="/images/sub/special_02.jpg" alt="망미골목 일원-특화거리B">
-              </li>
-              <li>
-                <p class="tit">특화거리C</p>
-                <img src="/images/sub/special_03.jpg" alt="특화거리C">
+                <p class="tit">수영성 에코쉼터(마을박물관)</p>
+                <img src="/images/sub/eco_02.jpg" alt="수영성 에코쉼터(마을박물관)">
               </li>
             </ul>
           </div>
@@ -386,8 +382,8 @@
         <script>
           var mapContainer = document.getElementById('special_map'), // 지도를 표시할 div  
             mapOption = {
-              center: new kakao.maps.LatLng(35.17174824254842, 129.11519720039627), // 지도의 중심좌표
-              level: 4 // 지도의 확대 레벨
+              center: new kakao.maps.LatLng(35.17108772957666, 129.11586600426608), // 지도의 중심좌표
+              level: 2 // 지도의 확대 레벨
             };
 
           var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -395,314 +391,70 @@
           // 마커를 표시할 위치와 title 객체 배열입니다 
           var positions = [
             {
-              title: 'A-1',              
-              latlng: new kakao.maps.LatLng(35.1692746519132, 129.1154513718245)
+              title: '수영성 에코쉼터(남문)',              
+              latlng: new kakao.maps.LatLng(35.17041974390825, 129.11515729258116)
             },
             {
-              title: 'A-2-1',
-              latlng: new kakao.maps.LatLng(35.169441193111155, 129.11571907411547)
-            },
-            {
-              title: 'A-2-2',
-              latlng: new kakao.maps.LatLng(35.17010389952535, 129.11698734639702)
-            },
-            {
-              title: 'A-2-3',
-              latlng: new kakao.maps.LatLng(35.17083350147501, 129.11391141509057)
-            },
-            {
-              title: 'A-2-4',
-              latlng: new kakao.maps.LatLng(35.171978917829726, 129.1112741963171)
-            },
-            {
-              title: 'A-3-1',
-              latlng: new kakao.maps.LatLng(35.17173225610759, 129.11094954852226)
-            },
-            {
-              title: 'A-3-2',
-              latlng: new kakao.maps.LatLng(35.16987047263608, 129.11384258136886)
-            },
-            {
-              title: 'B-1',
-              latlng: new kakao.maps.LatLng(35.171479165368446, 129.11641391141143)
-            },
-            {
-              title: 'B-2-1',
-              latlng: new kakao.maps.LatLng(35.1709225189779, 129.11706893468707)
-            },
-            {
-              title: 'B-2-2',
-              latlng: new kakao.maps.LatLng(35.16964146470428, 129.11534564425142)
-            },
-            {
-              title: 'B-2-3',
-              latlng: new kakao.maps.LatLng(35.16967135721503, 129.11440809965117)
-            },
-            {
-              title: 'C-1',
-              latlng: new kakao.maps.LatLng(35.17154598679062, 129.11129592410057)
-            },
-            {
-              title: 'C-2',
-              latlng: new kakao.maps.LatLng(35.17372351931959, 129.1125155976116)
-            },
-            {
-              title: 'C-3',
-              latlng: new kakao.maps.LatLng(35.17375439715338, 129.11384437730862)
+              title: '수영성 에코쉼터(마을박물관)',
+              latlng: new kakao.maps.LatLng(35.17146507901746, 129.116446470416)
             }
           ];
           // 마커 이미지의 이미지 주소입니다
           var imageSrc = [
-            '/images/sub/marker_a1.jpg',
-            '/images/sub/marker_a2.jpg',
-            '/images/sub/marker_a2.jpg',
-            '/images/sub/marker_a2.jpg',
-            '/images/sub/marker_a2.jpg',
-            '/images/sub/marker_a3.jpg',
-            '/images/sub/marker_a3.jpg',
-            '/images/sub/marker_b1.jpg',
-            '/images/sub/marker_b2.jpg',
-            '/images/sub/marker_b2.jpg',
-            '/images/sub/marker_b2.jpg',
-            '/images/sub/marker_c1.jpg',
-            '/images/sub/marker_c2.jpg',  
-            '/images/sub/marker_c3.jpg'       
+            '/images/sub/mapmarker_02.png',
+            '/images/sub/mapmarker_01.png'    
           ];
           
           for (var i = 0; i < positions.length; i++) {
             // 마커 이미지의 이미지 크기 입니다
-            var imageSize = new kakao.maps.Size(42, 19);            
+            var imageSize = new kakao.maps.Size(19, 23);            
             // 마커 이미지를 생성합니다 
             var markerImage = new kakao.maps.MarkerImage(imageSrc[i], imageSize);
             // 마커를 생성합니다
             var marker = new kakao.maps.Marker({
               map: map, // 마커를 표시할 지도
               position: positions[i].latlng, // 마커를 표시할 위치
-              //title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+              title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
               image: markerImage // 마커 이미지 
             });
           }
 
-          var polygonPath = [
-              new kakao.maps.LatLng(35.17133301416215, 129.11291467518646),
-              new kakao.maps.LatLng(35.171119106228225, 129.1117458213748),
-              new kakao.maps.LatLng(35.173006426719745, 129.11100444708381),
-              new kakao.maps.LatLng(35.17341059507468, 129.11056492374314),
-              new kakao.maps.LatLng(35.171999080931, 129.1098589664868), 
-              new kakao.maps.LatLng(35.17152610568528, 129.11011013669028),
-              new kakao.maps.LatLng(35.16837304459156, 129.11470370592278),
-              new kakao.maps.LatLng(35.16836135677408, 129.11537283646544), 
-              new kakao.maps.LatLng(35.16875192762646, 129.1167437772745),
-              new kakao.maps.LatLng(35.17020115517347, 129.11735202872254), 
-              new kakao.maps.LatLng(35.171096321567624, 129.11820932096296), 
-              new kakao.maps.LatLng(35.17226309779871, 129.1164177728763),
-              new kakao.maps.LatLng(35.172224579551965, 129.11604362994348),
-              new kakao.maps.LatLng(35.17079029186319, 129.11612717409886), 
-              new kakao.maps.LatLng(35.17070539360123, 129.11582865849738),
-              new kakao.maps.LatLng(35.17007602446136, 129.115746500169),
-              new kakao.maps.LatLng(35.17014923383322, 129.11516674597405),
-              new kakao.maps.LatLng(35.169596330225545, 129.11483416140788), 
-              new kakao.maps.LatLng(35.17034470318587, 129.11377803808153) 
-          ];
-
-          var polygon = new kakao.maps.Polygon({
-              path:polygonPath, // 그려질 다각형의 좌표 배열입니다
-              strokeWeight: 4, // 선의 두께입니다
-              strokeColor: '#ff3300', // 선의 색깔입니다
-              strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-              strokeStyle: 'shortdash', // 선의 스타일입니다
-              fillColor: '#A2FF99', // 채우기 색깔입니다
-              fillOpacity: 0.1 // 채우기 불투명도 입니다
-          });
-
-          polygon.setMap(map);
-
-          var polygonPath1 = [
-              new kakao.maps.LatLng(35.171177467221085, 129.1094316681388),
-              new kakao.maps.LatLng(35.17724657247649, 129.11254092627513),
-              new kakao.maps.LatLng(35.17661106271826, 129.1179682889804),
-              new kakao.maps.LatLng(35.1754592546437, 129.11838838755176),
-              new kakao.maps.LatLng(35.17218390552422, 129.1212007418883),
-              new kakao.maps.LatLng(35.171212689718885, 129.12005608821073), 
-              new kakao.maps.LatLng(35.16846564460709, 129.11945798707276),
-              new kakao.maps.LatLng(35.167459943043724, 129.11512999830566)
-          ];
-
-          var polygon1 = new kakao.maps.Polygon({
-              path:polygonPath1, // 그려질 다각형의 좌표 배열입니다
-              strokeWeight: 4, // 선의 두께입니다
-              strokeColor: '#333', // 선의 색깔입니다
-              strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-              strokeStyle: 'solid', // 선의 스타일입니다
-              fillColor: '#fff', // 채우기 색깔입니다
-              fillOpacity: 0 // 채우기 불투명도 입니다
-          });
-
-          polygon1.setMap(map);
-
-
           
-          var polyline1 = new kakao.maps.Polyline({
-            map: map, // 선을 표시할 지도 객체 
-            path: [ // 선을 구성하는 좌표 배열
-              new kakao.maps.LatLng(35.1688553211298, 129.11675743226664),
-              new kakao.maps.LatLng(35.16891933589254, 129.11618842379875),
-              new kakao.maps.LatLng(35.16959565965139, 129.1148725547261),              
-              new kakao.maps.LatLng(35.170281746929604, 129.11377092076745),
-              new kakao.maps.LatLng(35.171333109874645, 129.11290919030318),
-              new kakao.maps.LatLng(35.171110577080974, 129.1117181640145),
-              new kakao.maps.LatLng(35.17302472849188, 129.11098845793776),
-              new kakao.maps.LatLng(35.17339248457668, 129.11056994299852),
-
-              new kakao.maps.LatLng(35.17302472849188, 129.11098845793776),
-              new kakao.maps.LatLng(35.172577396084314, 129.1102854718152),
-              new kakao.maps.LatLng(35.17187674803864, 129.11067342744226),
-              new kakao.maps.LatLng(35.171396311949465, 129.11135241423318)
-            ],
-            strokeWeight: 5, // 선의 두께
-            strokeColor: '#0000cc', // 선 색
-            strokeOpacity: 0.5, // 선 투명도
-            strokeStyle: 'solid' // 선 스타일
-          });
-
-          var polyline1_2 = new kakao.maps.Polyline({
-            map: map, // 선을 표시할 지도 객체 
-            path: [ // 선을 구성하는 좌표 배열
-              new kakao.maps.LatLng(35.172200078339905, 129.11125247896612),
-              new kakao.maps.LatLng(35.171561848720785, 129.11012752270054),
-              new kakao.maps.LatLng(35.17199898535504, 129.1098644514256),
-              new kakao.maps.LatLng(35.171561848720785, 129.11012752270054),
-              new kakao.maps.LatLng(35.17097084019854, 129.11094632214486),//지도하단
-              new kakao.maps.LatLng(35.17155481130177, 129.11156503380354)
-            ],
-            strokeWeight: 5, // 선의 두께
-            strokeColor: '#0000cc', // 선 색
-            strokeOpacity: 0.5, // 선 투명도
-            strokeStyle: 'solid' // 선 스타일
-          });
-
-          var polyline1_3 = new kakao.maps.Polyline({
-            map: map, // 선을 표시할 지도 객체 
-            path: [ // 선을 구성하는 좌표 배열
-              new kakao.maps.LatLng(35.17097084019854, 129.11094632214486),//지도하단
-              new kakao.maps.LatLng(35.169066701258025, 129.11368459054404),
-              new kakao.maps.LatLng(35.16962440223404, 129.11425872800635)
-            ],
-            strokeWeight: 5, // 선의 두께
-            strokeColor: '#0000cc', // 선 색
-            strokeOpacity: 0.5, // 선 투명도
-            strokeStyle: 'solid' // 선 스타일
-          });
-
-          var polyline2 = new kakao.maps.Polyline({
-            map: map, // 선을 표시할 지도 객체 
-            path: [ // 선을 구성하는 좌표 배열
-              new kakao.maps.LatLng(35.169982012222576, 129.11390582928667 ),
-              new kakao.maps.LatLng(35.16975807444216, 129.11408659758345),
-              new kakao.maps.LatLng(35.16961012492952, 129.11430225621535),
-              new kakao.maps.LatLng(35.169802971636685, 129.11448284260365),
-              new kakao.maps.LatLng(35.16961012492952, 129.11430225621535),
-              new kakao.maps.LatLng(35.16916301646549, 129.115006758717),
-              new kakao.maps.LatLng(35.16935006493058, 129.1152612730058),
-              new kakao.maps.LatLng(35.16916301646549, 129.115006758717),
-              new kakao.maps.LatLng(35.16899422401865, 129.11538374652903)
-            ],
-            strokeWeight: 5, // 선의 두께
-            strokeColor: '#009999', // 선 색
-            strokeOpacity: 0.5, // 선 투명도
-            strokeStyle: 'solid' // 선 스타일
-          });
-          var polyline2_2 = new kakao.maps.Polyline({
-            map: map, // 선을 표시할 지도 객체 
-            path: [ // 선을 구성하는 좌표 배열
-              new kakao.maps.LatLng(35.169339332813294, 129.11535976497265),
-              new kakao.maps.LatLng(35.16938834662451, 129.1153912146617),
-              new kakao.maps.LatLng(35.16956413494429, 129.11564543875107),
-              new kakao.maps.LatLng(35.16938834662451, 129.1153912146617),
-              new kakao.maps.LatLng(35.169422747280954, 129.11535643900532),
-              new kakao.maps.LatLng(35.16955876887198, 129.11530783456047),
-              new kakao.maps.LatLng(35.16974739676466, 129.11495605050408 )
-            ],
-            strokeWeight: 5, // 선의 두께
-            strokeColor: '#009999', // 선 색
-            strokeOpacity: 0.5, // 선 투명도
-            strokeStyle: 'solid' // 선 스타일
-          });
-
-          var polyline2_3 = new kakao.maps.Polyline({
-            map: map, // 선을 표시할 지도 객체 
-            path: [ // 선을 구성하는 좌표 배열
-              new kakao.maps.LatLng(35.17064284704569, 129.11773113384513),
-              new kakao.maps.LatLng(35.170677830529435, 129.1172765945212),
-              new kakao.maps.LatLng(35.17054056345751, 129.1172675472578),
-              new kakao.maps.LatLng(35.170677830529435, 129.1172765945212),
-              new kakao.maps.LatLng(35.17083560403765, 129.1172724553553),
-              new kakao.maps.LatLng(35.17095734984693, 129.11713842956098),
-              new kakao.maps.LatLng(35.17102040517947, 129.11688216006888),
-              new kakao.maps.LatLng(35.170961235276735, 129.1167873411641),
-              new kakao.maps.LatLng(35.17108178204352, 129.11672187508447),
-              new kakao.maps.LatLng(35.170961235276735, 129.1167873411641),
-              new kakao.maps.LatLng(35.17091739678966, 129.11671761288164),
-              new kakao.maps.LatLng(35.1707620174695, 129.116842536177),
-              new kakao.maps.LatLng(35.17091739678966, 129.11671761288164),
-              new kakao.maps.LatLng(35.170859185530205, 129.1165679458294),
-              new kakao.maps.LatLng(35.170983086579284, 129.1164394621319),
-              new kakao.maps.LatLng(35.17084079040697, 129.11620256192302),
-              new kakao.maps.LatLng(35.170983086579284, 129.1164394621319),
-              new kakao.maps.LatLng(35.171405189764435, 129.11639278784475)
-            ],
-            strokeWeight: 5, // 선의 두께
-            strokeColor: '#009999', // 선 색
-            strokeOpacity: 0.5, // 선 투명도
-            strokeStyle: 'solid' // 선 스타일
-          });
 
 
         </script>
 
         <div class="special_bottom">
           <div class="sleft">
-            <p class="tit"><span><i>좌수영성 일원</i>특화경관 거리</span></p>
-            <p class="copy">수영의 과거, 현재, 미래를 아우르는 좌수영성 특화경관거리</p>
-            <img src="/images/sub/spe_m01.jpg" alt="좌수영성 일원 특화경관 거리">
+            <p class="tit"><span><i>에코쉼터</i>스마트사업</span></p>
+            <p class="copy">좌수영성과 어울리는 역사적 분위기의 주민쉼터 조성</p>
+            <img src="/images/sub/spe_m03.jpg" alt="에코쉼터">
           </div>
           <div class="sright">
             
-            <div class="active"><a href="#!" class="tablink">25 의용단길<span>(특화거리A)</span></a>
+            <div class="active"><a href="#!" class="tablink">남문 에코쉼터</span></a>
               <div class="special_slide">
-                <p><img src="/images/sub/spe_m01_01.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경</span></p>
-                <p><img src="/images/sub/spe_m01_02.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경2</span></p>
+                <p><img src="/images/sub/spe_m01_01.jpg" alt="남문 에코쉼터"><span>남문 에코쉼터</span></p>
+                <p><img src="/images/sub/spe_m01_02.jpg" alt="남문 에코쉼터"><span>남문 에코쉼터</span></p>
               </div>
             </div>
 
-            <div><a href="#!" class="tablink">망미골목<span>(특화거리B)</span></a>
+            <div><a href="#!" class="tablink">마을박물관 에코쉼터</span></a>
               <div class="special_slide">
-                <p><img src="/images/sub/spe_m01_01.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경</span></p>
-                <p><img src="/images/sub/spe_m01_02.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경2</span></p>
+                <p><img src="/images/sub/spe_m01_01.jpg" alt="마을박물관 에코쉼터"><span>마을박물관 에코쉼터</span></p>
+                <p><img src="/images/sub/spe_m01_02.jpg" alt="마을박물관 에코쉼터"><span>마을박물관 에코쉼터</span></p>
               </div>
             </div>
 
-            <div><a href="#!" class="tablink">특화거리 C</a>
-              <div class="special_slide">
-                <p><img src="/images/sub/spe_m01_01.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경</span></p>
-                <p><img src="/images/sub/spe_m01_02.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경2</span></p>
-              </div>
-            </div>
-
-            <div><a href="#!" class="tablink">토우조형물</a>
-              <div class="special_slide">
-                <p><img src="/images/sub/spe_m01_01.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경</span></p>
-                <p><img src="/images/sub/spe_m01_02.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경2</span></p>
-              </div>
-            </div>
 
           </div>
         </div>
 
         <h4><span>추진배경</span></h4>
         <ul class="list_ul">
-          <li>지역의 역사문화자산을 활용한 특화경관거리 조성으로 망미골목 ~ 팔도시장 일대 경제적 시너지 효과 창출</li>
-          <li>지역의 주요 자산을 발굴하고 연결하여 수영의 과거, 현재, 미래를 아우르는 정체성을 담은 지역 조성</li>
+          <li>문화재보호구역으로 좌수영성과 어울리는 역사적 분위기의 주민쉼터 조성</li>
+          <li>좌수영성터 전통보존 및 성벽 이미지 환경 디자인 개선</li>
+          <li>생활밀착형 도시재생 스마트기술인 공공전기자전거 설치로 이동의 편리성을 제공하고 뉴딜사업지 내 주요 관광자원간의 연계효과를 창출하기 위해 구축</li>
         </ul>
 
         <h4><span>사업개요</span></h4>
@@ -742,38 +494,7 @@
             </div>
         </div>
 
-        <h3><span>특화거리 상설 축제 및 프로그램 운영</span></h3>
-        <h4><span>도도수영 축제 오픈하우스</span></h4>
-        <ul class="list_ul">
-          <li>도시재생 뉴딜사업 거점공간인 ‘도도수영 8A’ 개소와 더불어 도시재생 사업지 내 소상공인 가게, 공방 등 다양한 공간 활성화 유도</li>
-          <li>도도수영 도시재생사업 대상지 내 거점을 연결하고, 이야기를 발굴하여 마을 전체를 먹거리, 볼거리가 있는 곳으로 지역 주민과 방문객에게 알리는 계기 마련</li>
-          <li>지역 주민과 함께 만들어나가는 프로그램을 운영함으로써, 지역민과 방문객 모두가 즐길 수 있는 경험 제공</li>
-        </ul>
 
-        <div class="special_bottom">
-          <div class="sleft">
-            <p class="tit"><span><i>도도수영</i>축제 오픈하우스</span></p>
-            <p class="copy">수영의 과거, 현재, 미래를 아우르는 좌수영성 특화경관거리</p>
-            <img src="/images/sub/spe_m04.jpg" alt="좌수영성 일원 특화경관 거리">
-          </div>
-          <div class="sright">
-            
-            <div class="active"><a href="#!" class="tablink">도슨트 투어</a>
-              <div class="special_slide">
-                <p><img src="/images/sub/spe_m01_01.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경</span></p>
-                <p><img src="/images/sub/spe_m01_02.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경2</span></p>
-              </div>
-            </div>
-
-            <div><a href="#!" class="tablink">스탬프 투어</span></a>
-              <div class="special_slide">
-                <p><img src="/images/sub/spe_m01_01.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경</span></p>
-                <p><img src="/images/sub/spe_m01_02.jpg" alt="좌수영성 일원 특화경관 거리"><span>좌수영길 야경2</span></p>
-              </div>
-            </div>
-
-          </div>
-        </div>
 
       </div>
     </div>
