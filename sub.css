@@ -178,7 +178,7 @@ p.point strong.blue {color:#d9ffff;}
 #tabProduct.tab4 li {width:25%;}
 #tabProduct.tab5 li {width:20%;}
 #tabProduct.tab6 li {width:20%;}
-#tabProduct li a {display:block; padding:2.0rem 0; text-align:center; border:1px solid #ddd; border-left:0;}
+#tabProduct li a {display:block; padding:2.0rem 1rem; text-align:center; border:1px solid #ddd; border-left:0; height:100%; display:flex; justify-content: center; align-items:center;}
 #tabProduct li:first-child a{border-left:1px solid #ddd;}
 #tabProduct li.active a {background:var(--main-color); color:#fff; position:relative;}
 #tabProduct li.active a:before {content:''; display:block; width:10px; height:10px; transform:rotate(45deg); background:var(--main-color); position:absolute; bottom:-5px; left:calc(50% - 5.5px);}
