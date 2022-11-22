@@ -281,6 +281,8 @@ $(document).ready(function() {
         slidesToScroll: 1,
         autoplaySpeed: 3000,
         arrows: true,
+        pauseOnFocus: true,
+        pauseOnHover: true,
         responsive: [    
             {
                 breakpoint:1340, 
