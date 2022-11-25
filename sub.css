@@ -9,6 +9,10 @@
 .box.pad1 { padding:5.0rem 1.0rem;}
 .saup_info{display:flex; flex-direction: row; justify-content: space-between; margin-bottom:5.0rem; flex-wrap: wrap;}
 .saup_info div {text-align:center;  border-right:3px dotted #ddd; width:25%; padding:0 2.5rem;}
+
+.saup_info.num3 div {width:33.33%;}
+.saup_info.num2 div {width:50%;}
+
 .saup_info div:last-child {border-right:0;}
 .saup_info div p.tit {font-weight:600; font-size:2.0rem; margin:2.0rem 0 1.5rem 0;} 
 .saup_info div:before {content:''; display:block; width:69px; height:69px; margin:0 auto;}
@@ -776,3 +780,12 @@ background-size: 100% 100%;}
 @media all and (max-width:1024px) {
 	.spe_copy {padding-left:0;}
 }
+
+.realname {display:flex; gap:8rem; flex-wrap:wrap; padding:5rem; justify-content: center;}
+.realname > div {border-radius:3rem; border:1px solid #ccc; width:44.0rem; text-align:center; padding:3rem; position:relative;}
+.realname > div p.realneme_tit { font-family: 'GmarketSans'; font-size:2.4rem; font-weight:600; color:#000;}
+.realname > div p.realneme_tit:before {content:''; display:block; width:12rem; height:12rem; margin:0 auto 1rem; background-position:50% 50%; background-size:100% 100%; background-repeat: no-repeat;}
+.realname > div div.realneme_con {border-radius:3rem; background:#f2f2f2; padding:3rem; margin-top:2rem; min-height:15rem; margin-bottom:2rem;}
+.realname > div a {position:absolute; bottom:-2.5rem; width:80%; border-radius:50px; left:10%; background:#333; padding:1.5rem; color:#fff;}
+.realname > div:nth-of-type(1) p.realneme_tit:before {background-image: url(/images/common/realname_icon01.png);}
+.realname > div:nth-of-type(2) p.realneme_tit:before {background-image: url(/images/common/realname_icon02.png);}
