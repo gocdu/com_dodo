@@ -785,7 +785,16 @@ background-size: 100% 100%;}
 .realname > div {border-radius:3rem; border:1px solid #ccc; width:44.0rem; text-align:center; padding:3rem; position:relative;}
 .realname > div p.realneme_tit { font-family: 'GmarketSans'; font-size:2.4rem; font-weight:600; color:#000;}
 .realname > div p.realneme_tit:before {content:''; display:block; width:12rem; height:12rem; margin:0 auto 1rem; background-position:50% 50%; background-size:100% 100%; background-repeat: no-repeat;}
-.realname > div div.realneme_con {border-radius:3rem; background:#f2f2f2; padding:3rem; margin-top:2rem; min-height:15rem; margin-bottom:2rem;}
+.realname > div div.realneme_con {border-radius:3rem; background:#f2f2f2; padding:3rem; margin-top:2rem; min-height:15rem; margin-bottom:2rem; font-size:1.6rem;}
+.realname > div div.realneme_con span {display:block;}
 .realname > div a {position:absolute; bottom:-2.5rem; width:80%; border-radius:50px; left:10%; background:#333; padding:1.5rem; color:#fff;}
 .realname > div:nth-of-type(1) p.realneme_tit:before {background-image: url(/images/common/realname_icon01.png);}
 .realname > div:nth-of-type(2) p.realneme_tit:before {background-image: url(/images/common/realname_icon02.png);}
+.realname > div:nth-of-type(1) a {background-color:#2d54d3;}
+.realname > div:nth-of-type(2) a {background-color:#00a3a0;}
+
+.realname > div:nth-of-type(1) div.realneme_con span:nth-of-type(1) {border-bottom:1px solid #ccc; padding-bottom:1rem; margin-bottom:1rem;}
+
+@media all and (max-width:768px) {
+	.realname {padding:0;}
+}
