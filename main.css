@@ -102,6 +102,10 @@ footer {margin-top:0;}
 .geojum_list #geojum li a.gl_02 {background:url(/images/main/sec1_list02.jpg) no-repeat 50% 50%;}
 .geojum_list #geojum li a.gl_03 {background:url(/images/main/sec1_list03.jpg) no-repeat 50% 50%;}
 .geojum_list #geojum li a.gl_04 {background:url(/images/main/sec1_list04.jpg) no-repeat 50% 50%;}
+.geojum_list #geojum li a.gl_05 {background:url(/images/main/sec1_list05.jpg) no-repeat 50% 50%;}
+.geojum_list #geojum li a.gl_06 {background:url(/images/main/sec1_list06.jpg) no-repeat 50% 50%;}
+.geojum_list #geojum li a.gl_07 {background:url(/images/main/sec1_list07.jpg) no-repeat 50% 50%;}
+.geojum_list #geojum li a.gl_08 {background:url(/images/main/sec1_list08.jpg) no-repeat 50% 50%;}
 .geojum_list #geojum li a span {position:absolute; bottom:0; left:0; font-size:1.4rem; color:#fff; padding:1.0rem; display:block; width:100%; padding-left:2.5rem;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0,0,0,0)), color-stop(1, rgba(0,0,0,1)));
 	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
@@ -255,12 +259,15 @@ footer {margin-top:0;}
 
 #section3 .nncontroll .controll {display:flex;}
 #section3 .nncontroll .controll a,
-#section3 .nncontroll .controll button {width:2.0rem; height:2.0rem; position:relative; overflow:hidden; text-indent:-9999px; display:flex; justify-content: center; align-items: center; font-size:2.5rem; margin-right:0.5rem;}
-#section3 .nncontroll .controll a:before {content:"\ED9D"; font-family: remixicon!important; text-indent:0; color:#000; font-size:2.0rem;}
-#section3 .nncontroll .controll .next-slide:before {content:"\EA6E"; font-family: remixicon!important; text-indent:0; color:#000;}
-#section3 .nncontroll .controll .prev-slide:before {content:"\EA64"; font-family: remixicon!important; text-indent:0; color:#000;}
-#section3 .nncontroll .controll .stop-slide:before {content:"\EFDA"; font-family: remixicon!important; text-indent:0; color:#000;}
-#section3 .nncontroll .controll .start-slide:before {content:"\F012"; font-family: remixicon!important; text-indent:0; color:#000;}
+#section3 .nncontroll .controll button {width:3.0rem; height:3.0rem; position:relative; overflow:hidden; text-indent:-9999px;}
+#section3 .nncontroll .controll button:before,
+#section3 .nncontroll .controll a:before { font-family: remixicon!important; text-indent:0; color:#000; font-size:2.0rem; position:absolute; top:0; left:0; width:3rem; height:3rem; display:flex; justify-content: center; align-items: center;}
+
+#section3 .nncontroll .controll a:before {content:"\ED9D";}
+#section3 .nncontroll .controll .next-slide:before {content:"\EA6E";}
+#section3 .nncontroll .controll .prev-slide:before {content:"\EA64";}
+#section3 .nncontroll .controll .stop-slide:before {content:"\EFDA";}
+#section3 .nncontroll .controll .start-slide:before {content:"\F012";}
 
 @media (max-width: 1520px){
 	#section3 .nncontroll {width:100%; left:0;}
@@ -308,12 +315,13 @@ footer {margin-top:0;}
 .sec4con .popupzone .popuplist .items img {width:100%;}
 .sec4con .popupzone .popupzone-controll {position:absolute; top:4.0rem; right:4.0rem;}
 .sec4con .popupzone .popupzone-controll {display:flex;}
-.sec4con .popupzone .popupzone-controll button {width:2.0rem; height:2.0rem; position:relative; overflow:hidden; text-indent:-9999px; display:flex; justify-content: center; align-items: center; font-size:2.5rem; margin-right:0.5rem;}
-.sec4con .popupzone .popupzone-controll a:before {content:"\ED9D"; font-family: remixicon!important; text-indent:0; color:#000; font-size:2.0rem;}
-.sec4con .popupzone .popupzone-controll .next-slide:before {content:"\EA6E"; font-family: remixicon!important; text-indent:0; color:#000;}
-.sec4con .popupzone .popupzone-controll .prev-slide:before {content:"\EA64"; font-family: remixicon!important; text-indent:0; color:#000;}
-.sec4con .popupzone .popupzone-controll .stop-slide:before {content:"\EFDA"; font-family: remixicon!important; text-indent:0; color:#000;}
-.sec4con .popupzone .popupzone-controll .start-slide:before {content:"\F012"; font-family: remixicon!important; text-indent:0; color:#000;}
+.sec4con .popupzone .popupzone-controll button {width:2.0rem; height:2.0rem; position:relative; overflow:hidden; text-indent:-9999px;  font-size:2.5rem; margin-right:0.5rem;}
+
+.sec4con .popupzone .popupzone-controll button:before {display:flex; justify-content: center; align-items: center;font-family: remixicon!important; text-indent:0; color:#000; width:2.0rem; height:2.0rem;}
+.sec4con .popupzone .popupzone-controll .next-slide:before {content:"\EA6E"; }
+.sec4con .popupzone .popupzone-controll .prev-slide:before {content:"\EA64";  }
+.sec4con .popupzone .popupzone-controll .stop-slide:before {content:"\EFDA"; }
+.sec4con .popupzone .popupzone-controll .start-slide:before {content:"\F012"; }
 
 .sec4con .notice {position:relative; border-radius: 3.0rem 0 0 0; padding:4.5rem; width:364px; background:#434656; color:#fff;}
 .sec4con .notice p.new {font-size:1.6rem; color:#464646; background:#fff; display:inline-block; padding:0.5rem 1.5rem 0.2rem 1.5rem; border-radius:30px; margin-bottom:2.0rem;}
@@ -408,4 +416,4 @@ footer {margin-top:0;}
 }
 /* #section2, */
 /* #section3, */
-/* #section4 {display:none;} */
+/* #section4 {display:none;} */                  

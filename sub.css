@@ -95,13 +95,14 @@
 .geojum_img .controll {background:#333; color:#fff;line-height:2.0rem; z-index:3; position:relative;width:170px;  margin:-2.0rem auto 2.0rem auto; border-radius:30px; padding:1.0rem 1.5rem 1.0rem 2.0rem; font-size:1.2rem; text-align:center; display:flex; justify-content: space-between;}
 .geojum_img .controll p {display:inline-block; font-weight:200;}
 .geojum_img .controll p .current {font-size:1.4rem; font-weight:600;}
-.geojum_img .controll div {display:flex;}
-.geojum_img .controll button {color:#fff; width:2.0rem; height:2.0rem; overflow:hidden; text-indent:-9999px; position:relative; display:flex; justify-content: center; align-items:center;}
-.geojum_img .controll button:before {content:'0'; color:#fff; display:block; text-indent:0;}
-.geojum_img .controll button.prev-slide:before {content: "\EA64"; font-family: remixicon!important; }
-.geojum_img .controll button.next-slide:before {content: "\EA6E"; font-family: remixicon!important; }
-.geojum_img .controll button.stop-slide:before {content: "\EFDA"; font-family: remixicon!important; }
-.geojum_img .controll button.start-slide:before {content: "\F012"; font-family: remixicon!important; }
+/* .geojum_img .controll div {display:flex;} */
+.geojum_img .controll button {color:#fff; width:2.0rem; height:2.0rem; overflow:hidden; text-indent:-9999px; position:relative; }
+.geojum_img .controll button:before {color:#fff; text-indent:0; display:flex; justify-content: center; align-items:center; width:2.0rem; height:2.0rem;font-family: remixicon!important; }
+.geojum_img .controll button.prev-slide:before {content: "\EA64"; }
+.geojum_img .controll button.next-slide:before {content: "\EA6E"; }
+.geojum_img .controll button.stop-slide:before {content: "\EFDA"; }
+.geojum_img .controll button.start-slide:before {content: "\F012";}
+
 .geojum_info {width:45%; z-index:1;}
 .geojum_info .tit {color:#1c3c66;}
 .geojum_info .tit span {font-size:2.4rem; margin-bottom:1.5rem; font-weight:600; display:block;}
@@ -433,7 +434,7 @@ p.caution_red::before {content:''; display:block; width:1.8rem; height:1.8rem; b
 .course_tit:after {content:''; width:22.5rem; height:29.0rem; background:url(/images/sub/course_ilu02.png) no-repeat 0 0; background-size:100% 100%; display:block; position:absolute; top:calc(50% - 14.5rem); right:0; z-index:10;}
 .course_tit img {z-index:100; position:relative;}
 @media all and (max-width:1024px) {
-	.course_tit {padding:6.0rem 7.5rem 5.0rem 8.25rem;}
+	.course_tit {padding:6.0rem 7.5rem 5.0rem 8.25rem; overflow:hidden;}
 	.course_tit:before {width:10.5rem; height:18.6rem; top:calc(50% - 9.3rem); left:-3.0rem;}
 	.course_tit:after {width:11.25rem; height:14.5rem; top:calc(50% - 7.25rem); right:-3.0rem;}
 }
@@ -798,3 +799,4 @@ background-size: 100% 100%;}
 @media all and (max-width:768px) {
 	.realname {padding:0;}
 }
+             

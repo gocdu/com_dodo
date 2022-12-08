@@ -137,7 +137,7 @@ $(document).ready(function() {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 1000,
+        autoplaySpeed: 3000,
         arrows: true,
         prevArrow: '<button type="button" data-role="none" class="slick-prev" role="button"><span>PREV</span></button>',
         nextArrow: '<button type="button" data-role="none" class="slick-next" role="button"><span>NEXT</span></button>'
@@ -241,4 +241,4 @@ $(document).ready(function() {
     });
     
 
-});
+});   
