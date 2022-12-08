@@ -97,6 +97,7 @@
 .geojum_img .controll p .current {font-size:1.4rem; font-weight:600;}
 /* .geojum_img .controll div {display:flex;} */
 .geojum_img .controll button {color:#fff; width:2.0rem; height:2.0rem; overflow:hidden; text-indent:-9999px; position:relative; }
+
 .geojum_img .controll button:before {color:#fff; text-indent:0; display:flex; justify-content: center; align-items:center; width:2.0rem; height:2.0rem;font-family: remixicon!important; }
 .geojum_img .controll button.prev-slide:before {content: "\EA64"; }
 .geojum_img .controll button.next-slide:before {content: "\EA6E"; }
