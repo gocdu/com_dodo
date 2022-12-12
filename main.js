@@ -137,10 +137,11 @@ $(document).ready(function() {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 5000,
+        pauseOnHover: true,
         arrows: true,
-        prevArrow: '<button type="button" data-role="none" class="slick-prev" role="button"><span>PREV</span></button>',
-        nextArrow: '<button type="button" data-role="none" class="slick-next" role="button"><span>NEXT</span></button>'
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" role="button"><span><i>PREV</i></span></button>',
+        nextArrow: '<button type="button" data-role="none" class="slick-next" role="button"><span><i>NEXT</i></span></button>'
     });
 
     //const sec3slide = $('.sec3slide');
@@ -241,4 +242,4 @@ $(document).ready(function() {
     });
     
 
-});   
+});                         
