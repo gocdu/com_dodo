@@ -1,10 +1,20 @@
 $(document).ready(function() {
 
 
-    /* var url = document.location.href;
+    var url = document.location.href;
     var query = window.location.search;
-    var param = new URLSearchParams(query);
-    var menuCd = param.get('menuCd');
+//    var param = new URLSearchParams(query);
+//    var menuCd = param.get('menuCd');
+	var menuCd = "";
+	
+	var params = query.substr(query.indexOf("?")+1).split("&");
+	$.each(params, function(index, item) {
+		if(item.split("=")[0] == "menuCd") {
+			menuCd = item.split("=")[1];
+			return false;
+		}
+	}); 
+
     console.log(menuCd);
     var subtopImg = document.querySelector('.subtop_visual');
 
@@ -20,9 +30,11 @@ $(document).ready(function() {
         subtopImg.className += ' sub05';
     } else if (menuCd.indexOf('DOM_000000106') === 0 ) {
         subtopImg.className += ' sub06';
+    } else if (menuCd.indexOf('DOM_000000108') === 0 ) {
+        subtopImg.className += ' sub07';        
     } else {
         subtopImg.className += ' sub01';
-    } */
+    }
 
 
 
@@ -44,7 +56,7 @@ $(document).ready(function() {
         specialslide.slick('setPosition');
         tabtt.preventDefault();
     });
-/* 특화경관거리 */
+/* �뱁솕寃쎄�嫄곕━ */
     var specialslide = $('.special_slide');
     specialslide.slick({
         slidesToShow:1,
@@ -59,7 +71,7 @@ $(document).ready(function() {
         focusOnSelect: true
     });
 
-/* 이미지 슬라이드 */
+/* �대�吏� �щ씪�대뱶 */
     var $piclist = $('.piclist');
     var $slide = $piclist.find('ul');
     
@@ -110,7 +122,7 @@ $(document).ready(function() {
     }
 
     
-/* 이미지 슬라이드 */
+/* �대�吏� �щ씪�대뱶 */
 
 
 
@@ -164,7 +176,7 @@ $(document).ready(function() {
         }
     }
     
-    /* 거점시설 이미지 롤링 */
+    /* 嫄곗젏�쒖꽕 �대�吏� 濡ㅻ쭅 */
     var $sliderFor = $('.slider-for');
     $sliderFor.slick({
         slidesToShow: 1,
@@ -243,6 +255,7 @@ $(document).ready(function() {
             }
         });
         tabtt.preventDefault();
+	$floor_slide_con.slick('setPosition');
     });
 
 
@@ -299,6 +312,55 @@ $(document).ready(function() {
         ]
     });
 
-});
+var $floor_slide_con = $('.floor_slide_con');
+    $floor_slide_con.slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: false,
+        fade: true
+        //asNavFor: '.slider-nav'
+    });
+    /* $('.geojum_img .start-slide').hide();
+    $('.geojum_img .stop-slide').on('click', function() {
+        $('.geojum_img .start-slide').show(); 
+        $(this).hide();
+        $sliderFor.slick('slickPause');
+    });
+    $('.geojum_img .start-slide').on('click', function() {
+        $('.geojum_img .stop-slide').show(); 
+        $(this).hide();
+        $sliderFor.slick('slickPlay');
+    }); */
+    $('.floor_slide .prev-slide').on('click', function() {
+        $floor_slide_con.slick('slickPrev');
+    });
+    $('.floor_slide .next-slide').on('click', function() {
+        $floor_slide_con.slick('slickNext');
+    });
 
+    /*달력*/
+    $('.calBody li.possible').on('click', function() {
+        if ($(this).hasClass('choice')) {
+            $(this).removeClass('choice'); 
+        } else {
+            $(this).addClass('choice');
+        }
+    });
+
+    $('.aco p').on('click', function() {
+        $(this).parent('div').toggleClass('active').siblings().removeClass('active');
+        $(this).next().slideToggle();
+        $(this).parent().siblings().find('div').slideUp();
+    });
+
+    $('.timeselect ul li').on('click', function() {
+        if ($(this).hasClass('off')) {            
+        } else {
+            $(this).toggleClass('select');
+            //$(this).nextAll('li:lt(2)').toggleClass('select');
+        }
+    });
+});
 
